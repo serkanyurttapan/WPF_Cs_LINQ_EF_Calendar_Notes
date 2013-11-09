@@ -1,0 +1,26 @@
+﻿<Window x:Class="WPF_Calendar_With_Notes.WindowOfPositions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:a="http://schemas.AvalonControls/AvalonControlsLibrary/Controls"
+        Title="Nowa notatka" Height="323" Width="479">
+    <Grid>
+
+        <Label FontSize="14" FontFamily="Tahoma" Content="{Binding Date, Source={StaticResource Resources}}"  Height="26" HorizontalAlignment="Left" Margin="34,29,0,0" Name="label1" VerticalAlignment="Top" Width="52" />
+
+        <Label FontSize="14" FontFamily="Tahoma" Content="{Binding ChooseHour, Source={StaticResource Resources}}" Height="26" HorizontalAlignment="Left" Margin="34,74,0,0" Name="label2" VerticalAlignment="Top" Width="103" />
+
+        <Label FontSize="14" FontFamily="Tahoma" Content="{Binding ContentOfNote, Source={StaticResource Resources}}" Height="26" HorizontalAlignment="Left" Margin="34,128,0,0" Name="label3" VerticalAlignment="Top" Width="117" />
+        
+        
+        
+        <TextBox FontSize="12" Text="{Binding Path=CurrentNote, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                 HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto"
+                 Height="77" HorizontalAlignment="Left" Margin="190,128,0,0" Name="textBox1" VerticalAlignment="Top" Width="252" AcceptsReturn="True" />
+
+        <Button Content="{Binding Save, Source={StaticResource Resources}}" Height="28" HorizontalAlignment="Left" Margin="55,231,0,0" Name="bSave" VerticalAlignment="Top" Width="139" Click="bSave_Click" />
+
+        <Button Content="{Binding Cancel, Source={StaticResource Resources}}" Height="28" HorizontalAlignment="Right" Margin="0,231,71,0" Name="bCancel" VerticalAlignment="Top" Width="139" Click="bCancel_Click" />
+        <a:TimePicker FontSize="14" SelectedHour="{Binding Path=CurrentHour, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" SelectedMinute="{Binding Path=CurrentMinute, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" SelectedSecond="0" Name="timePicker1" Margin="190,74,0,0" Height="30" Width="100" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <TextBlock FontSize="14" Height="27" HorizontalAlignment="Left" Margin="190,29,0,0" Name="textBlock1" Text="" VerticalAlignment="Top" Width="170" />
+    </Grid>
+</Window>
