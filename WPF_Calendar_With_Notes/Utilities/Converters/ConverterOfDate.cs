@@ -48,7 +48,7 @@ namespace WPF_Calendar_With_Notes.Utilities.Converters
                 }
                 else
                 {
-                    MessageBox.Show("Data musi mieć format YYYY-MM-DD", "Niewłaściwy format daty", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Date must be YYYY-MM-DD formatted", "Invalid date format", MessageBoxButton.OK, MessageBoxImage.Information);
                     return new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
                 }
 
@@ -56,7 +56,7 @@ namespace WPF_Calendar_With_Notes.Utilities.Converters
             }
             else
             {
-                MessageBox.Show("Data musi mieć format YYYY-MM-DD", "Niewłaściwy format daty", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Date must be YYYY-MM-DD formatted", "Invalid date format", MessageBoxButton.OK, MessageBoxImage.Information);
                 return new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day);
             }
 

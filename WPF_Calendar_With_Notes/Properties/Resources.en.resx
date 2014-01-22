@@ -213,4 +213,10 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="CurrentNoteBusy" xml:space="preserve">
+    <value>Current note is not available. The old note will be deleted! Do You want to proceed?</value>
+  </data>
+  <data name="ReplaceNote" xml:space="preserve">
+    <value>Replace old note with new one?</value>
+  </data>
 </root>

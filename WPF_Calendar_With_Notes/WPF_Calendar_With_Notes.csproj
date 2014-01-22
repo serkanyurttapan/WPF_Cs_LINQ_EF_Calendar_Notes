@@ -97,11 +97,7 @@
     </Compile>
     <Compile Include="Model\PositionOfDay.cs" />
     <Compile Include="Model\Timer_CalendarPatch.cs" />
-    <Compile Include="Utilities\Commands\ApplicationDeleteSelectedNoteCommand.cs" />
-    <Compile Include="Utilities\Commands\ApplicationEditSelectedNoteCommand.cs" />
-    <Compile Include="Utilities\Commands\ApplicationHelpCommand.cs" />
-    <Compile Include="Utilities\Commands\ApplicationNewNoteCommand.cs" />
-    <Compile Include="Utilities\Commands\ApplicationLanguageChangeCommand.cs" />
+    <Compile Include="Utilities\CommandBase.cs" />
     <Compile Include="Utilities\Converters\ConverterOfDate.cs" />
     <Compile Include="Utilities\Converters\ConverterOfHour.cs" />
     <Compile Include="Utilities\Converters\ConverterOfMinute.cs" />

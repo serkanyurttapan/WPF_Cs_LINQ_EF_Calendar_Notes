@@ -213,4 +213,10 @@
   <data name="Save" xml:space="preserve">
     <value>Zapisz</value>
   </data>
+  <data name="CurrentNoteBusy" xml:space="preserve">
+    <value>Podana godzina i minuta jest już zajęta.Poprzednia notatka zostanie usunięta.Kontynuować?</value>
+  </data>
+  <data name="ReplaceNote" xml:space="preserve">
+    <value>Zapisać nową notatkę na miejscu starej?</value>
+  </data>
 </root>

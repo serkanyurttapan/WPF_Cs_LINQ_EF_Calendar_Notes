@@ -65,8 +65,10 @@ namespace WPF_Calendar_With_Notes
             m_Broker.RegisterFor(EventType.LanguageChanged, this);
 
             string cultureInformation = CultureInfo.CurrentCulture.Name;
+
             if (!cultureInformation.Equals("pl-PL"))
-                new Utilities.Commands.ApplicationLanguageChangeCommand(m_Broker).Execute("en-GB");
+                //new Utilities.Commands.ApplicationLanguageChangeCommand(m_Broker).Execute("en-GB");
+                viewModel.LanguageChangeCommand.Execute("en-GB");
 
             //Łatka,bo
             //gdy klikamy na kalendarz wtedy zaznaczone daty ulegają odznaczeniu,
@@ -172,6 +174,12 @@ namespace WPF_Calendar_With_Notes
         private void bQuit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+
+            //MessageBox.Show(viewModel.selectedPos==null?"Zaznacz niepusta notatke":viewModel.selectedPos.CurrentNote);
         }
 
     }
