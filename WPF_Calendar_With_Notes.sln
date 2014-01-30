@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2013
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Calendar_With_Notes", "WPF_Calendar_With_Notes\WPF_Calendar_With_Notes.csproj", "{BA9D83DB-64D8-4A44-B993-8D8E05F3DA50}"
 EndProject
 Global
