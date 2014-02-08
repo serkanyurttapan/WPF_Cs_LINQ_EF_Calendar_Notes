@@ -46,7 +46,7 @@ namespace WPF_Calendar_With_Notes.Model
         public ObservableCollection<PositionOfDay> Positions { get; set; }
 
         private IEventBroker m_Broker;
-        public NotesEntities1 m_notesDB;
+        public NotesEntities m_notesDB;
         public CalendarEngine(IEventBroker broker)
         {
             m_Broker = broker;

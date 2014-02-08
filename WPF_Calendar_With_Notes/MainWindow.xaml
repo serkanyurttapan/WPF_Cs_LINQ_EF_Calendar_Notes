@@ -8,7 +8,6 @@
         Height="517" Width="785">
 
     <Window.Resources>
-        <!--<VM:ApplicationViewModel x:Key="VMForDataContext"/>-->
         <Converters:ConverterOfDate x:Key="StatusBarDateConverter" />
         <Converters:ConverterOfHour x:Key="InstanceOfHour"/>
         <Converters:ConverterOfMinute x:Key="InstanceOfMinute"/>
@@ -25,8 +24,6 @@
                 <MenuItem Header="{Binding Exit,Source={StaticResource Resources}}" Click="bQuit_Click"/>
             </MenuItem>
 
-            <!--en-US lub pl-PL-->
-            <!--<add key="language" value="en-US"/>-->
             <MenuItem Header="{Binding Options, Source={StaticResource Resources}}">
                 <MenuItem Header="{Binding Language, Source={StaticResource Resources}}" >
                     <MenuItem Header="EN" Command="{Binding LanguageChangeCommand}" CommandParameter="en-GB" />
@@ -78,9 +75,8 @@
                     Path=SelectedDate, Converter={StaticResource DataGridDescriptionDateConverter} }" 
                    Height="30" Width="290" FontFamily="Tahoma" 
                    FontSize="14" HorizontalAlignment="Left" Margin="353,24,0,0" Name="lDataGridDescription" VerticalAlignment="Top"/>
-            
-            
-            <DataGrid SelectedItem="{Binding Path=selectedPos}"
+
+            <DataGrid
                 PreviewKeyDown="dataGrid1_PreviewKeyDown" RowEditEnding="dataGrid1_RowEditEnding" 
                       IsReadOnly="False" ItemsSource="{Binding Path=engine.Positions}" AutoGenerateColumns="False" 
                       HorizontalAlignment="Left" SelectedCellsChanged="dataGrid1_SelectedCellsChanged"

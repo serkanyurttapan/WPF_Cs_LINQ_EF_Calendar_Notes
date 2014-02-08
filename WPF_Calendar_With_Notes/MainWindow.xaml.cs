@@ -16,7 +16,6 @@ using WPF_Calendar_With_Notes.ViewModel;
 using System.Globalization;
 using WPF_Calendar_With_Notes.CommonTypes;
 
-
 namespace WPF_Calendar_With_Notes
 {
     /// <summary>
@@ -24,11 +23,12 @@ namespace WPF_Calendar_With_Notes
     /// </summary>
     public partial class MainWindow : Window, IListener
     {
-
+        private UnityContainer m_Container;
         private ApplicationViewModel viewModel;
         public CalendarEngine engine { get; set; }
         private Timer_CalendarPatch patch;
         public Sem m_Sem = new Sem();
+
 
         public MainWindow()
         {
@@ -56,7 +56,14 @@ namespace WPF_Calendar_With_Notes
             m_Broker = new EventBroker();
             engine = new CalendarEngine(m_Broker);
 
-            viewModel = new ApplicationViewModel(engine, m_Broker, dataGrid1);
+            m_Container = new UnityContainer();
+            m_Container.RegisterInstance<CalendarEngine>(engine);
+            m_Container.RegisterInstance<IEventBroker>(m_Broker);
+            m_Container.RegisterInstance<DataGrid>(dataGrid1);
+
+            //viewModel = new ApplicationViewModel(engine, m_Broker, dataGrid1);
+            viewModel = m_Container.Resolve<ApplicationViewModel>();
+
             this.DataContext = viewModel;
 
             bEditSelected.IsEnabled = false;
@@ -106,9 +113,6 @@ namespace WPF_Calendar_With_Notes
             patch.Timer.Tick -= patch.Timer_Tick;
         }
 
-
-        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        //wpf bringintoview - dodać procedure
         private void MainCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -174,12 +178,6 @@ namespace WPF_Calendar_With_Notes
         private void bQuit_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
-        }
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-
-            //MessageBox.Show(viewModel.selectedPos==null?"Zaznacz niepusta notatke":viewModel.selectedPos.CurrentNote);
         }
 
     }

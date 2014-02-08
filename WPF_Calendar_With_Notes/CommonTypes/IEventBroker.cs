@@ -7,7 +7,7 @@ namespace WPF_Calendar_With_Notes.CommonTypes
 {
     public enum EventType
     {
-        LanguageChanged
+        LanguageChanged,UnUsedType
     }
 
     public interface IListener

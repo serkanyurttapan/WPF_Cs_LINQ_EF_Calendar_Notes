@@ -26,7 +26,6 @@ C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes\WPF_Calendar_W
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\WPF_Calendar_With_Notes.exe.config
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Debug\WPF_Calendar_With_Notes.exe
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Debug\WPF_Calendar_With_Notes.pdb
-C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\Notes.sdf
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\WPF_Calendar_With_Notes.exe
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\WPF_Calendar_With_Notes.pdb
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\en\WPF_Calendar_With_Notes.resources.dll
@@ -48,3 +47,5 @@ C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Cal
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Debug\WPF_Calendar_With_Notes.Properties.Resources.en.resources
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Debug\WPF_Calendar_With_Notes.csproj.GenerateResource.Cache
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Debug\en\WPF_Calendar_With_Notes.resources.dll
+C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\Microsoft.Practices.ObjectBuilder2.dll
+C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\DB\Notes.sdf

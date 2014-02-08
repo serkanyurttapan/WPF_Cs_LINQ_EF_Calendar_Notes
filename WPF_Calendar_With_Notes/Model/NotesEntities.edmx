@@ -21,7 +21,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="NotesModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="NotesEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="NotesEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Notes" EntityType="NotesModel.Note" />
         </EntityContainer>
         <EntityType Name="Note">
@@ -37,7 +37,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="NotesModelStoreContainer" CdmEntityContainer="NotesEntities1">
+        <EntityContainerMapping StorageEntityContainer="NotesModelStoreContainer" CdmEntityContainer="NotesEntities">
           <EntitySetMapping Name="Notes">
             <EntityTypeMapping TypeName="NotesModel.Note">
               <MappingFragment StoreEntitySet="Notes">
@@ -67,7 +67,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="NotesModel">
+      <Diagram Name="NotesEntities">
         <EntityTypeShape EntityType="NotesModel.Note" Width="1.5" PointX="0.75" PointY="0.75" Height="1.59568359375" IsExpanded="true" />
       </Diagram>
     </Diagrams>

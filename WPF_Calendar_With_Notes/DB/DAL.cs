@@ -7,11 +7,11 @@ namespace WPF_Calendar_With_Notes.DB
 {
     class DAL
     {
-        private static readonly Lazy<Model.NotesEntities1> _instancja = new Lazy<Model.NotesEntities1>(() => new Model.NotesEntities1());
+        private static readonly Lazy<Model.NotesEntities> _instancja = new Lazy<Model.NotesEntities>(() => new Model.NotesEntities());
 
         private DAL() { }
 
-        public static Model.NotesEntities1 Instancja
+        public static Model.NotesEntities Instancja
         {
             get
             {

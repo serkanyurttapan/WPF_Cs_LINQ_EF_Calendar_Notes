@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("notes.sdf")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("db/notes.sdf")]
 
 

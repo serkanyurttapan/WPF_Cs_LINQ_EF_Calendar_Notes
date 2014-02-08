@@ -24,7 +24,6 @@ C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes\WPF_Calendar_W
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Release\en\WPF_Calendar_With_Notes.resources.dll
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Release\WPF_Calendar_With_Notes.exe
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Release\WPF_Calendar_With_Notes.pdb
-C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Release\Notes.sdf
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Release\WPF_Calendar_With_Notes.exe.config
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Release\WPF_Calendar_With_Notes.exe
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Release\WPF_Calendar_With_Notes.pdb
@@ -49,3 +48,7 @@ C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Cal
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Release\en\WPF_Calendar_With_Notes.resources.dll
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Release\WPF_Calendar_With_Notes.exe
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Release\WPF_Calendar_With_Notes.pdb
+C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Release\DB\Notes.sdf
+C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Release\Microsoft.Practices.Unity.dll
+C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Release\Microsoft.Practices.ObjectBuilder2.dll
+C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2010\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\x86\Release\WPF_Calendar_With_Notes.csprojResolveAssemblyReference.cache

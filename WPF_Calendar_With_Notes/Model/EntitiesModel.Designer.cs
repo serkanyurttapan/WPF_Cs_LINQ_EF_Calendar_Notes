@@ -24,32 +24,32 @@ namespace WPF_Calendar_With_Notes.Model
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class NotesEntities1 : ObjectContext
+    public partial class NotesEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new NotesEntities1 object using the connection string found in the 'NotesEntities1' section of the application configuration file.
+        /// Initializes a new NotesEntities object using the connection string found in the 'NotesEntities' section of the application configuration file.
         /// </summary>
-        public NotesEntities1() : base("name=NotesEntities1", "NotesEntities1")
+        public NotesEntities() : base("name=NotesEntities", "NotesEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new NotesEntities1 object.
+        /// Initialize a new NotesEntities object.
         /// </summary>
-        public NotesEntities1(string connectionString) : base(connectionString, "NotesEntities1")
+        public NotesEntities(string connectionString) : base(connectionString, "NotesEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new NotesEntities1 object.
+        /// Initialize a new NotesEntities object.
         /// </summary>
-        public NotesEntities1(EntityConnection connection) : base(connection, "NotesEntities1")
+        public NotesEntities(EntityConnection connection) : base(connection, "NotesEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
