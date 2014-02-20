@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace WPF_Calendar_With_Notes.Model
 {
     public class PositionOfDay : INotifyPropertyChanged, IDataErrorInfo
     {
-        
+
         public PositionOfDay()
         {
 
@@ -28,7 +29,7 @@ namespace WPF_Calendar_With_Notes.Model
             get { return m_OldHour; }
             set { m_OldHour = value; }
         }
-        
+
 
 
         private short m_CurrentHour;
@@ -48,7 +49,7 @@ namespace WPF_Calendar_With_Notes.Model
             get { return m_OldMinute; }
             set { m_OldMinute = value; }
         }
-        
+
 
         private short m_CurrentMinute;
         public short CurrentMinute
@@ -57,20 +58,21 @@ namespace WPF_Calendar_With_Notes.Model
             set
             {
                 m_CurrentMinute = value;
+                //m_DateTimeVal.Minute = m_CurrentMinute;// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 WyslijPowiadomienie("CurrentMinute");
             }
         }
 
 
-        private string m_OldNote="";
+        private string m_OldNote = "";
         public string OldNote
         {
             get { return m_OldNote; }
             set { m_OldNote = value; }
         }
-        
 
-        private string m_CurrentNote="";
+
+        private string m_CurrentNote = "";
         public string CurrentNote
         {
             get { return m_CurrentNote; }
@@ -80,6 +82,19 @@ namespace WPF_Calendar_With_Notes.Model
                 WyslijPowiadomienie("CurrentNote");
             }
         }
+
+        private DateTime m_DateTimeVal;
+        public DateTime DateTimeVal
+        {
+            get { return m_DateTimeVal; }
+            set 
+            { 
+                m_DateTimeVal = value;
+                m_CurrentHour = (short)m_DateTimeVal.Hour;
+                m_CurrentMinute = (short)m_DateTimeVal.Minute;
+            }
+        }
+        
 
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -101,7 +116,8 @@ namespace WPF_Calendar_With_Notes.Model
 
         public string this[string columnName]
         {
-            get {
+            get
+            {
                 switch (columnName)
                 {
                     case "CurrentHour":
@@ -118,7 +134,7 @@ namespace WPF_Calendar_With_Notes.Model
                         break;
                     case "CurrentNote":
                         if (CurrentNote == null) break;
-                        if (CurrentNote.Length>498)
+                        if (CurrentNote.Length > 498)
                         {
                             return "Notatka za długa. Max długość notatki to 498 znaków";
                         }
@@ -127,7 +143,7 @@ namespace WPF_Calendar_With_Notes.Model
 
                 }
                 return "";
-            
+
             }
         }
     }

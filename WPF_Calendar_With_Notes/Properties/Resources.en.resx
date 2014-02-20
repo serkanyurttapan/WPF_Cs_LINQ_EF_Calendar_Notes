@@ -123,8 +123,23 @@
   <data name="AddNewNote" xml:space="preserve">
     <value>Add Note</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChooseHour" xml:space="preserve">
+    <value>Choose Hour</value>
+  </data>
   <data name="ChoosingDay" xml:space="preserve">
     <value>Choose a Day</value>
+  </data>
+  <data name="ContentOfNote" xml:space="preserve">
+    <value>Content of note</value>
+  </data>
+  <data name="CurrentNoteBusy" xml:space="preserve">
+    <value>Current note is not available. The old note will be deleted! Do You want to proceed?</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
   </data>
   <data name="EditedDay" xml:space="preserve">
     <value>Edited day</value>
@@ -147,6 +162,9 @@
   <data name="HelpInformation" xml:space="preserve">
     <value>Calendar with notes.\nSelect a day to add or remove note.\nAdding notes: button Add Note.\nEditing: button Edit Selected Note. Buttons are available \n after note is selected.</value>
   </data>
+  <data name="HelpInformationTitle" xml:space="preserve">
+    <value>Calendar With Notes help information.</value>
+  </data>
   <data name="Hour" xml:space="preserve">
     <value>Hour</value>
   </data>
@@ -159,38 +177,11 @@
   <data name="Minute" xml:space="preserve">
     <value>Min</value>
   </data>
-  <data name="Note" xml:space="preserve">
-    <value>Note</value>
-  </data>
-  <data name="NumberOfNotes" xml:space="preserve">
-    <value>Number of notes</value>
-  </data>
-  <data name="Options" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="Quit" xml:space="preserve">
-    <value>Application will close. Continue?</value>
-  </data>
-  <data name="RemoveSelectedNote" xml:space="preserve">
-    <value>Remove Selected</value>
-  </data>
-  <data name="HelpInformationTitle" xml:space="preserve">
-    <value>Calendar With Notes help information.</value>
-  </data>
   <data name="None" xml:space="preserve">
     <value>&lt;none&gt;</value>
   </data>
-  <data name="NoteWillBeDeleted" xml:space="preserve">
-    <value>Note will be deleted</value>
-  </data>
-  <data name="NoteWillBeDeletedTitle" xml:space="preserve">
-    <value>Romeving note</value>
-  </data>
-  <data name="NumberOfPositionDescription" xml:space="preserve">
-    <value>Number of Notes</value>
-  </data>
-  <data name="QuitTitle" xml:space="preserve">
-    <value>Confirm exiting</value>
+  <data name="Note" xml:space="preserve">
+    <value>Note</value>
   </data>
   <data name="NoteEmpty" xml:space="preserve">
     <value>Note is empty. Do You want to continue?</value>
@@ -198,25 +189,34 @@
   <data name="NoteEmptyTitle" xml:space="preserve">
     <value>Information about empty note</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="NoteWillBeDeleted" xml:space="preserve">
+    <value>Note will be deleted</value>
   </data>
-  <data name="ChooseHour" xml:space="preserve">
-    <value>Choose Hour</value>
+  <data name="NoteWillBeDeletedTitle" xml:space="preserve">
+    <value>Romeving note</value>
   </data>
-  <data name="ContentOfNote" xml:space="preserve">
-    <value>Content of note</value>
+  <data name="NumberOfNotes" xml:space="preserve">
+    <value>Number of notes</value>
   </data>
-  <data name="Date" xml:space="preserve">
-    <value>Date</value>
+  <data name="NumberOfPositionDescription" xml:space="preserve">
+    <value>Number of Notes</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="Options" xml:space="preserve">
+    <value>Options</value>
   </data>
-  <data name="CurrentNoteBusy" xml:space="preserve">
-    <value>Current note is not available. The old note will be deleted! Do You want to proceed?</value>
+  <data name="Quit" xml:space="preserve">
+    <value>Application will close. Continue?</value>
+  </data>
+  <data name="QuitTitle" xml:space="preserve">
+    <value>Confirm exiting</value>
+  </data>
+  <data name="RemoveSelectedNote" xml:space="preserve">
+    <value>Remove Selected</value>
   </data>
   <data name="ReplaceNote" xml:space="preserve">
     <value>Replace old note with new one?</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
   </data>
 </root>

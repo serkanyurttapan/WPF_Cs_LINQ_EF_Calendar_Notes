@@ -19,7 +19,7 @@
     <DockPanel>
 
         <Menu Height="23" x:Name="menu1" DockPanel.Dock="Top">
-            
+
             <MenuItem Header="{Binding File,Source={StaticResource Resources}}">
                 <MenuItem Header="{Binding Exit,Source={StaticResource Resources}}" Click="bQuit_Click"/>
             </MenuItem>
@@ -99,7 +99,7 @@
                         UpdateSourceTrigger=PropertyChanged, 
                         Converter={StaticResource InstanceOfNote},                        
                         ValidatesOnDataErrors=True}" MinWidth="350" />
-                    
+
                 </DataGrid.Columns>
             </DataGrid>
 
@@ -111,6 +111,7 @@
                 Height="24"  Margin="580,390,0,0"  Width="120" Command="{Binding DeleteSelectedNoteCommand}" />
 
             <Button Content="{Binding AddNewNote, Source={StaticResource Resources}}" HorizontalAlignment="Left" Name="bAddNote" VerticalAlignment="Top" FontSize="12" Height="24" Margin="230,390,0,0" Width="120" Command="{Binding NewNoteCommand}" />
+
         </Grid>
 
     </DockPanel>

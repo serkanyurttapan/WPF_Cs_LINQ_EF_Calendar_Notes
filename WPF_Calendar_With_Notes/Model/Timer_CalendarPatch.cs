@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
 namespace WPF_Calendar_With_Notes.Model
 {
-
-
     //Kontrolka Calendar posiada cechę,która jest tu przeszkodą.
     //Kiedy użytkownik klika na dany dzien, wtedy przestają byc zaznaczone inne, wczesniej zaznaczone dni.
     public class Timer_CalendarPatch
@@ -22,7 +21,7 @@ namespace WPF_Calendar_With_Notes.Model
 
         public DispatcherTimer Timer = new DispatcherTimer();
 
-        public Timer_CalendarPatch(Menu _menu, Button _button, Calendar _calendar, CalendarEngine _model,Sem _sem)
+        public Timer_CalendarPatch(Menu _menu, Button _button, Calendar _calendar, CalendarEngine _model, Sem _sem)
         {
             m_sem = _sem;
             m_menu = _menu;
@@ -45,7 +44,6 @@ namespace WPF_Calendar_With_Notes.Model
             if (m_GUI_cal.SelectedDates.Count == 1)
                 if (m_sem.zrobione == 0)
                 {
-
                     m_sem.uzywany = true;
 
                     m_GUI_cal.SelectedDates.Clear();
@@ -53,8 +51,8 @@ namespace WPF_Calendar_With_Notes.Model
                     m_GUI_cal.SelectedDates.Add(m_model.Selected_Date);
 
                     foreach (var item in m_model.m_notesDB.Notes)
-                    { 
-                        DateTime dt = new DateTime(item.Note_DateTime.Year, item.Note_DateTime.Month, item.Note_DateTime.Day);
+                    {
+                        DateTime dt = new DateTime(item.Date.Year, item.Date.Month, item.Date.Day);
                         m_GUI_cal.SelectedDates.Add(dt);
                     }
 
@@ -65,10 +63,8 @@ namespace WPF_Calendar_With_Notes.Model
                     m_addButton.Focus();
 
                 }
-
-
         }
 
-
     }
+
 }

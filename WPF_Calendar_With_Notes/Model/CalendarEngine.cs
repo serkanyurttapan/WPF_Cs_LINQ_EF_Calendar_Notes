@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Globalization;
@@ -10,6 +11,7 @@ using WPF_Calendar_With_Notes.Utilities;
 
 namespace WPF_Calendar_With_Notes.Model
 {
+
     public class CalendarEngine : INotifyPropertyChanged, IListener
     {
 
@@ -46,17 +48,18 @@ namespace WPF_Calendar_With_Notes.Model
         public ObservableCollection<PositionOfDay> Positions { get; set; }
 
         private IEventBroker m_Broker;
-        public NotesEntities m_notesDB;
+        public DAL.NotesContext m_notesDB;
         public CalendarEngine(IEventBroker broker)
         {
+
             m_Broker = broker;
 
             Positions = new ObservableCollection<PositionOfDay>();
 
             DateTime dt_tmp = DateTime.Now;
             m_selected_date = new DateTime(dt_tmp.Year, dt_tmp.Month, dt_tmp.Day);
-            
-            m_notesDB = DB.DAL.Instancja;
+
+            m_notesDB  = DAL.DBSingleton.Instancja;
 
             m_Broker.RegisterFor(EventType.LanguageChanged, this);
         }
@@ -88,30 +91,35 @@ namespace WPF_Calendar_With_Notes.Model
             }
         }
 
-        
+
         public List<Tuple<short, short, string>> GetNotesForSelectedDay(DateTime date)
         {
             List<Tuple<short, short, string>> retList1 = new List<Tuple<short, short, string>>();
+
+
+
+                foreach (var item in m_notesDB.Notes.Where(item => item.Date.Year == date.Year &&
+                                                            item.Date.Month == date.Month &&
+                                                            item.Date.Day == date.Day
+                                                            ).ToList())
+                {
+                    retList1.Add(new Tuple<short, short, string>((short)item.Date.Hour, (short)item.Date.Minute,
+                        item.Message));
+                }
             
-            foreach (var item in m_notesDB.Notes.Where(item => item.Note_DateTime.Year==date.Year &&
-                                                        item.Note_DateTime.Month == date.Month &&
-                                                        item.Note_DateTime.Day == date.Day
-                                                        ).ToList())
-            {
-                retList1.Add(new Tuple<short, short, string>((short)item.Note_DateTime.Hour, (short)item.Note_DateTime.Minute,
-                    item.Note_String));
-            }
+
+
 
             List<Tuple<short, short, string>> retList2
                 = retList1.OrderBy(a => a.Item1).ThenBy(a => a.Item2).ToList();
-              
+
             return retList2;
         }
 
 
         public int AddNoteToDB(string note, short hour, short minute)
         {
-            int res2=-1;
+            int res2 = -1;
 
             res2 = AddNote_ForDB_hlp(note, Selected_Date, hour, minute);
 
@@ -126,16 +134,17 @@ namespace WPF_Calendar_With_Notes.Model
 
             //m_DBNotatki.Database.ExecuteSqlCommand("delete from NotatkaEncja");
             Note n = new Note();
-            n.Note_Id = Guid.NewGuid();
-            n.Note_String = _note;
+
+            //n.Note_Id = Guid.NewGuid();//baza sdf
+            n.Message = _note;
 
             DateTime dt = new DateTime(_date.Year, _date.Month, _date.Day, _hour, _minute, 0);
-            n.Note_DateTime = dt;
+            n.Date = dt;
 
-            m_notesDB.Notes.AddObject(n);
-            //m_DBNotatki.NotatkaEncjas.Add(ne);
+            m_notesDB.Notes.Add(n);
 
-            m_notesDB.SaveChanges();
+            var i = m_notesDB.SaveChanges();
+
             return 0;
         }
 
@@ -145,15 +154,15 @@ namespace WPF_Calendar_With_Notes.Model
             DateTime Date_tmp = new DateTime(date.Year, date.Month, date.Day);
 
             var q = m_notesDB.Notes.Where(item =>
-                item.Note_DateTime.Year==date.Year                
+                item.Date.Year == date.Year
                 &&
-                item.Note_DateTime.Month==date.Month                
+                item.Date.Month == date.Month
                 &&
-                item.Note_DateTime.Day==date.Day
+                item.Date.Day == date.Day
                 &&
-                item.Note_DateTime.Hour==date.Hour
+                item.Date.Hour == date.Hour
                 &&
-                item.Note_DateTime.Minute==date.Minute                
+                item.Date.Minute == date.Minute
                 );
 
             if (q != null) return 1;
@@ -178,11 +187,11 @@ namespace WPF_Calendar_With_Notes.Model
             var month = date.Month;
             var day = date.Day;
 
-            var q = m_notesDB.Notes.Where(item => item.Note_DateTime.Year == year && item.Note_DateTime.Month == month && item.Note_DateTime.Day == day && item.Note_DateTime.Hour == hour && item.Note_DateTime.Minute == minute).ToList();
-                
+            var q = m_notesDB.Notes.Where(item => item.Date.Year == year && item.Date.Month == month && item.Date.Day == day && item.Date.Hour == hour && item.Date.Minute == minute).ToList();
+
             foreach (var item in q)
             {
-                m_notesDB.DeleteObject(item);
+                m_notesDB.Notes.Remove(item);
             }
 
             if (q.Count > 0)
@@ -209,4 +218,6 @@ namespace WPF_Calendar_With_Notes.Model
 
 
     }
+
+
 }

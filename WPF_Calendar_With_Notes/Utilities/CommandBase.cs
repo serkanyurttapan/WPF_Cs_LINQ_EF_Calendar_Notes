@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace WPF_Calendar_With_Notes.Utilities
@@ -11,7 +12,7 @@ namespace WPF_Calendar_With_Notes.Utilities
         private Action<object> m_action;
         private Func<object, bool> m_functor;
 
-        public CommandBase(Action<object> _action, Func<object,bool> _func)
+        public CommandBase(Action<object> _action, Func<object, bool> _func)
         {
             m_action = _action;
             m_functor = _func;

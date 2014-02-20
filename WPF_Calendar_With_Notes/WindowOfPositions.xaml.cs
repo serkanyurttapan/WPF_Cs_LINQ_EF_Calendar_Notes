@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,6 +15,7 @@ using WPF_Calendar_With_Notes.Model;
 
 namespace WPF_Calendar_With_Notes
 {
+
     /// <summary>
     /// Interaction logic for OknoWidokuPozycjiDnia.xaml
     /// </summary>
@@ -29,21 +31,27 @@ namespace WPF_Calendar_With_Notes
             InitializeComponent();
         }
 
-        public WindowOfPositions(PositionOfDay _pozycja,CalendarEngine _c_engine)
-            :this()
+        public WindowOfPositions(PositionOfDay _pozycja, CalendarEngine _c_engine)
+            : this()
         {
+            Loaded += WindowOfPositions_Loaded;
             m_pozycja = _pozycja;
             DataContext = m_pozycja;
-            m_cal_engine = _c_engine;
 
+            m_cal_engine = _c_engine;
             m_date = m_cal_engine.Selected_Date;
 
-            textBlock1.Text = m_date.ToString().Remove(10)  + m_date.ToString(" (dddd)");
+            textBlock1.Text = m_date.ToString().Remove(10) + m_date.ToString(" (dddd)");
+        }
+
+        void WindowOfPositions_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.timePicker1.Value= new DateTime(1,1,1,m_pozycja.CurrentHour,m_pozycja.CurrentMinute,0);
         }
 
         private void bSave_Click(object sender, RoutedEventArgs e)
         {
-            
+
             if (string.IsNullOrEmpty(m_pozycja.CurrentNote))
             {
                 MessageBoxResult result = MessageBox.Show(Properties.Resources.NoteEmpty, Properties.Resources.NoteEmptyTitle, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
@@ -65,7 +73,7 @@ namespace WPF_Calendar_With_Notes
             else
             {
                 this.DialogResult = true;
-                this.Close();              
+                this.Close();
 
             }
 
@@ -77,5 +85,6 @@ namespace WPF_Calendar_With_Notes
             this.Close();
         }
     }
-}
 
+
+}

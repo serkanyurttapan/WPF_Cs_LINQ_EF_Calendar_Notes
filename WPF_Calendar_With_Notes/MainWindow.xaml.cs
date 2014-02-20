@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -9,21 +10,22 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Navigation;
 using WPF_Calendar_With_Notes.Model;
 using WPF_Calendar_With_Notes.ViewModel;
 using System.Globalization;
 using WPF_Calendar_With_Notes.CommonTypes;
 
+
 namespace WPF_Calendar_With_Notes
 {
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window, IListener
     {
-        private UnityContainer m_Container;
         private ApplicationViewModel viewModel;
         public CalendarEngine engine { get; set; }
         private Timer_CalendarPatch patch;
@@ -56,13 +58,7 @@ namespace WPF_Calendar_With_Notes
             m_Broker = new EventBroker();
             engine = new CalendarEngine(m_Broker);
 
-            m_Container = new UnityContainer();
-            m_Container.RegisterInstance<CalendarEngine>(engine);
-            m_Container.RegisterInstance<IEventBroker>(m_Broker);
-            m_Container.RegisterInstance<DataGrid>(dataGrid1);
-
-            //viewModel = new ApplicationViewModel(engine, m_Broker, dataGrid1);
-            viewModel = m_Container.Resolve<ApplicationViewModel>();
+            viewModel = new ApplicationViewModel(engine, m_Broker, dataGrid1);
 
             this.DataContext = viewModel;
 
@@ -106,6 +102,8 @@ namespace WPF_Calendar_With_Notes
 
         void MainWindow_Closed(object sender, EventArgs e)
         {
+            engine.m_notesDB.Dispose();
+
             Loaded -= MainWindow_Loaded;
             Closing -= MainWindow_Closing;
             Closed -= MainWindow_Closed;
@@ -180,6 +178,7 @@ namespace WPF_Calendar_With_Notes
             this.Close();
         }
 
+
     }
 
 
@@ -187,7 +186,6 @@ namespace WPF_Calendar_With_Notes
     {
         public bool uzywany { get; set; }
         public int zrobione { get; set; }
-
 
         public Sem()
         {

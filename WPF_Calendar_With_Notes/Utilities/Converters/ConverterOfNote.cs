@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows;
 
@@ -20,7 +21,7 @@ namespace WPF_Calendar_With_Notes.Utilities.Converters
             string val = value.ToString();
 
             if (val.Length > 498)
-            {                
+            {
                 MessageBox.Show("Note is too long");
                 return val.Remove(498);
             }
@@ -36,4 +37,5 @@ namespace WPF_Calendar_With_Notes.Utilities.Converters
             return val;
         }
     }
+
 }

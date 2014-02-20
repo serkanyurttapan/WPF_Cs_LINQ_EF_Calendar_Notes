@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using WPF_Calendar_With_Notes.Model;
 using System.Windows.Input;
 using System.Windows.Controls;
@@ -33,7 +34,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
             engine = _engin;
             m_DataGrid = _dataGrid;
             m_Broker = _broker;
-            this.LanguageChangeCommand = new Utilities.CommandBase(LanguageChangeAction,m_true);
+            this.LanguageChangeCommand = new Utilities.CommandBase(LanguageChangeAction, m_true);
             this.HelpCommand = new Utilities.CommandBase(HelpAction, m_true);
             this.DeleteSelectedNoteCommand = new Utilities.CommandBase(DeleteAction, m_true);
             this.NewNoteCommand = new Utilities.CommandBase(NewNoteAction, m_true);
@@ -51,7 +52,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
 
             i18nManager.ChangeCulture(currentUiCulture);
 
-            m_Broker.FireEvent(EventType.LanguageChanged, new object());  
+            m_Broker.FireEvent(EventType.LanguageChanged, new object());
         }
 
         void HelpAction(object parameter)
@@ -77,6 +78,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
 
         void NewNoteAction(object parameter)
         {
+            
             PositionOfDay pozycja = new PositionOfDay() { CurrentHour = 0, CurrentMinute = 0, CurrentNote = String.Empty };
 
             WindowOfPositions okno = new WindowOfPositions(pozycja, engine);
@@ -88,7 +90,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
                 int res = engine.AddNoteToDB(pozycja.CurrentNote, pozycja.CurrentHour, pozycja.CurrentMinute);
 
                 if (res == -1)
-                    if (MessageBox.Show(Properties.Resources.CurrentNoteBusy, Properties.Resources.ReplaceNote , MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                    if (MessageBox.Show(Properties.Resources.CurrentNoteBusy, Properties.Resources.ReplaceNote, MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                     {
                         engine.RemoveNoteFromDB(pozycja.CurrentHour, pozycja.CurrentMinute);
                         engine.AddNoteToDB(pozycja.CurrentNote, pozycja.CurrentHour, pozycja.CurrentMinute);
@@ -98,11 +100,13 @@ namespace WPF_Calendar_With_Notes.ViewModel
 
             }
 
+            
 
         }
 
         void EditSelectedNoteAction(object parameter)
         {
+            
             foreach (var row in m_DataGrid.SelectedItems)
             {
                 PositionOfDay selectedPosition = row as PositionOfDay;
@@ -151,8 +155,9 @@ namespace WPF_Calendar_With_Notes.ViewModel
             }
             engine.UpdateOfPositions();
 
-
+            
         }
 
     }
+
 }

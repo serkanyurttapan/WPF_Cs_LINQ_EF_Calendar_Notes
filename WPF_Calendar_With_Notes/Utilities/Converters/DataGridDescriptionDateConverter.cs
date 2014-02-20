@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Windows.Data;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Windows.Data;
 
 namespace WPF_Calendar_With_Notes.Utilities.Converters
 {
@@ -19,7 +20,7 @@ namespace WPF_Calendar_With_Notes.Utilities.Converters
 
                 string res = dt.ToString().Remove(10);
 
-                res = string.Format("{0}: {1}",Properties.Resources.EditedDay,res);
+                res = string.Format("{0}: {1}", Properties.Resources.EditedDay, res);
 
                 res += " (" + dt.ToString("dddd") + ")";
 

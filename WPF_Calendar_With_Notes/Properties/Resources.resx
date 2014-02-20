@@ -123,8 +123,23 @@
   <data name="AddNewNote" xml:space="preserve">
     <value>Dodaj Notatkę</value>
   </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
+  <data name="ChooseHour" xml:space="preserve">
+    <value>Wybierz godzinę</value>
+  </data>
   <data name="ChoosingDay" xml:space="preserve">
     <value>Wybór Dnia</value>
+  </data>
+  <data name="ContentOfNote" xml:space="preserve">
+    <value>Treść notatki</value>
+  </data>
+  <data name="CurrentNoteBusy" xml:space="preserve">
+    <value>Podana godzina i minuta jest już zajęta.Poprzednia notatka zostanie usunięta.Kontynuować?</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Dzień</value>
   </data>
   <data name="EditedDay" xml:space="preserve">
     <value>Edytowany dzień</value>
@@ -147,6 +162,9 @@
   <data name="HelpInformation" xml:space="preserve">
     <value>Kalendarz z notatkami.\nZaznacz dzień, aby dopisać lub usunąć notatki.\nDodawanie notatek: Przycisk Dodaj Notatkę.\nEdytowanie: Przycisk Edytuj Zaznaczoną. Przyciski uaktywniają się,\npo zaznaczeniu notatki.</value>
   </data>
+  <data name="HelpInformationTitle" xml:space="preserve">
+    <value>Pomoc do programu Kalendarz z Notatkami</value>
+  </data>
   <data name="Hour" xml:space="preserve">
     <value>Hour</value>
   </data>
@@ -159,38 +177,11 @@
   <data name="Minute" xml:space="preserve">
     <value>Min</value>
   </data>
-  <data name="Note" xml:space="preserve">
-    <value>Notatka</value>
-  </data>
-  <data name="NumberOfNotes" xml:space="preserve">
-    <value>Liczba Notatek</value>
-  </data>
-  <data name="Options" xml:space="preserve">
-    <value>Opcje</value>
-  </data>
-  <data name="Quit" xml:space="preserve">
-    <value>Aplikacja zostanie zamknięta. Kontynuować?</value>
-  </data>
-  <data name="RemoveSelectedNote" xml:space="preserve">
-    <value>Usuń Zaznaczoną</value>
-  </data>
-  <data name="HelpInformationTitle" xml:space="preserve">
-    <value>Pomoc do programu Kalendarz z Notatkami</value>
-  </data>
   <data name="None" xml:space="preserve">
     <value>&lt;brak&gt;</value>
   </data>
-  <data name="NoteWillBeDeleted" xml:space="preserve">
-    <value>Notatka zostanie usunięta</value>
-  </data>
-  <data name="NoteWillBeDeletedTitle" xml:space="preserve">
-    <value>Usuwanie notatki</value>
-  </data>
-  <data name="NumberOfPositionDescription" xml:space="preserve">
-    <value>Ilość notatek</value>
-  </data>
-  <data name="QuitTitle" xml:space="preserve">
-    <value>Potwierdź zakończenie</value>
+  <data name="Note" xml:space="preserve">
+    <value>Notatka</value>
   </data>
   <data name="NoteEmpty" xml:space="preserve">
     <value>Notatka jest pusta. Zapisać?</value>
@@ -198,25 +189,34 @@
   <data name="NoteEmptyTitle" xml:space="preserve">
     <value>Informacja o pustej notatce</value>
   </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Anuluj</value>
+  <data name="NoteWillBeDeleted" xml:space="preserve">
+    <value>Notatka zostanie usunięta</value>
   </data>
-  <data name="ChooseHour" xml:space="preserve">
-    <value>Wybierz godzinę</value>
+  <data name="NoteWillBeDeletedTitle" xml:space="preserve">
+    <value>Usuwanie notatki</value>
   </data>
-  <data name="ContentOfNote" xml:space="preserve">
-    <value>Treść notatki</value>
+  <data name="NumberOfNotes" xml:space="preserve">
+    <value>Liczba Notatek</value>
   </data>
-  <data name="Date" xml:space="preserve">
-    <value>Dzień</value>
+  <data name="NumberOfPositionDescription" xml:space="preserve">
+    <value>Ilość notatek</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Zapisz</value>
+  <data name="Options" xml:space="preserve">
+    <value>Opcje</value>
   </data>
-  <data name="CurrentNoteBusy" xml:space="preserve">
-    <value>Podana godzina i minuta jest już zajęta.Poprzednia notatka zostanie usunięta.Kontynuować?</value>
+  <data name="Quit" xml:space="preserve">
+    <value>Aplikacja zostanie zamknięta. Kontynuować?</value>
+  </data>
+  <data name="QuitTitle" xml:space="preserve">
+    <value>Potwierdź zakończenie</value>
+  </data>
+  <data name="RemoveSelectedNote" xml:space="preserve">
+    <value>Usuń Zaznaczoną</value>
   </data>
   <data name="ReplaceNote" xml:space="preserve">
     <value>Zapisać nową notatkę na miejscu starej?</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Zapisz</value>
   </data>
 </root>

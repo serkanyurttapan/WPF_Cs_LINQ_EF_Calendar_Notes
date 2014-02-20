@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
-using System.Windows.Data;
+using System.Threading.Tasks;
 using System.Windows;
-using System.Globalization;
+using System.Windows.Data;
 
 namespace WPF_Calendar_With_Notes.Utilities
 {
@@ -21,7 +22,7 @@ namespace WPF_Calendar_With_Notes.Utilities
         {
             get
             {
-                if (m_provider==null)
+                if (m_provider == null)
                     lock (LockObject)
                     {
                         if (m_provider == null)
@@ -29,7 +30,7 @@ namespace WPF_Calendar_With_Notes.Utilities
                     }
                 return m_provider;
 
-            }            
+            }
         }
 
         public static void ChangeCulture(CultureInfo culture)
@@ -38,21 +39,6 @@ namespace WPF_Calendar_With_Notes.Utilities
             Properties.Resources.Culture = culture;
             ResourceProvider.Refresh();
         }
-
-
-
-
-
-
-
     }
-
-
-
-
-
-
-
-
 
 }
