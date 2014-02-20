@@ -49,3 +49,6 @@ C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2013\WPF_Cal
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2013\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\Microsoft.Practices.Unity.xml
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2013\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
 C:\Users\Ela\Desktop\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_vs2013\WPF_Calendar_With_Notes\WPF_Calendar_With_Notes\obj\Debug\WPF_Calendar_With_Notes.csprojResolveAssemblyReference.cache
+C:\Users\Ela\Desktop\GitHub\WPF_Cs_LINQ_EF_SampleProj\WPF_Cs_LINQ_EF_Calendar_Notes\WPF_Cs_LINQ_EF_Calendar_Notes\WPF_Calendar_With_Notes\bin\Debug\WPF_Calendar_With_Notes.exe.config
+C:\Users\Ela\Desktop\GitHub\WPF_Cs_LINQ_EF_SampleProj\WPF_Cs_LINQ_EF_Calendar_Notes\WPF_Cs_LINQ_EF_Calendar_Notes\WPF_Calendar_With_Notes\obj\Debug\WPF_Calendar_With_Notes.exe
+C:\Users\Ela\Desktop\GitHub\WPF_Cs_LINQ_EF_SampleProj\WPF_Cs_LINQ_EF_Calendar_Notes\WPF_Cs_LINQ_EF_Calendar_Notes\WPF_Calendar_With_Notes\obj\Debug\WPF_Calendar_With_Notes.pdb

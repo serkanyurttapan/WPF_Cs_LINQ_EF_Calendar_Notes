@@ -1,14 +1,10 @@
-C# Language project showing MVVM pattern in simple project: Calendar with Notes. The project enable User to store and modify notes or messages according to the calendar dates in VS 2010
+C# Language project showing MVVM pattern in simple project: Calendar with Notes. The project enable User to store notes in LocalDB according to the calendar dates in VS 2013
 
-As now, it consists of 1 project in 1 solution.
+Solution includes:
 
-Which includes:
+-*.mdf Data Base type with Code First approach (reqiures VISUAL STUDIO 2013)
 
--SDF model Data Base, with reqiures VISUAL STUDIO 2010
-
--EF ORM Data mapping to .Net objects
-
--UnityContainer for ViewModel
+-EF 6.0 for best usage
 
 -Simple Linq queries
 
@@ -18,6 +14,6 @@ Attention: Project still under constraction.
 
 To Do:
 
-Styles
+Styles, UnityContainer
 
 Author
