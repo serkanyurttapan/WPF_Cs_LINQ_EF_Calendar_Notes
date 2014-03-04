@@ -42,7 +42,7 @@ namespace WPF_Calendar_With_Notes.Model
         public DateTime Selected_Date
         {
             get { return m_selected_date; }
-            set { m_selected_date = value; WyslijPowiadomienie("WybranaData"); }
+            set { m_selected_date = value; WyslijPowiadomienie("Selected_Date"); }
         }
 
         public ObservableCollection<PositionOfDay> Positions { get; set; }
