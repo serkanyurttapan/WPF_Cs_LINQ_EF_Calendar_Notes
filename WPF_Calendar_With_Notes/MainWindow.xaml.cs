@@ -91,16 +91,6 @@ namespace WPF_Calendar_With_Notes
                 if (type == EventType.SelectedDateChanged)
                 {
                     m_DtList = ((IData)data).DtList;
-
-                    //foreach (var item in m_DtList)
-                    //{
-                    //    DateTime dt = new DateTime(item.Date.Year, item.Date.Month, item.Date.Day);
-                    //    MainCalendar.SelectedDates.Add(dt);
-                    //}
-
-                    //menu1.Focus();
-                    //bAddNote.Focus();                
-
                 }
 
         }
