@@ -79,10 +79,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="Xceed.Wpf.AvalonDock, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\Xceed.Wpf.AvalonDock.dll</HintPath>
-    </Reference>
     <Reference Include="Xceed.Wpf.Toolkit, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Xceed.Wpf.Toolkit.dll</HintPath>
@@ -95,6 +91,7 @@
     </ApplicationDefinition>
     <Compile Include="AppHelper.cs" />
     <Compile Include="CommonTypes\EventBroker.cs" />
+    <Compile Include="CommonTypes\IData.cs" />
     <Compile Include="CommonTypes\IEventBroker.cs" />
     <Compile Include="DAL\DBSingleton.cs" />
     <Compile Include="DAL\NotesInitializer.cs" />
@@ -105,7 +102,6 @@
     <Compile Include="Model\Note.cs" />
     <Compile Include="DAL\NotesContext.cs" />
     <Compile Include="Model\PositionOfDay.cs" />
-    <Compile Include="Model\Timer_CalendarPatch.cs" />
     <Compile Include="Utilities\CommandBase.cs" />
     <Compile Include="Utilities\Converters\ConverterOfDate.cs" />
     <Compile Include="Utilities\Converters\ConverterOfHour.cs" />

@@ -26,6 +26,7 @@ namespace WPF_Calendar_With_Notes.Utilities
                     lock (LockObject)
                     {
                         if (m_provider == null)
+                            //ponowne zaladowanie zasobow jezykowych (slownika) z plikow *resx
                             m_provider = (ObjectDataProvider)Application.Current.FindResource("Resources");
                     }
                 return m_provider;

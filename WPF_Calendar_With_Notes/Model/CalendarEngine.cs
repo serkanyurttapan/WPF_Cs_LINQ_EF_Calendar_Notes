@@ -11,10 +11,8 @@ using WPF_Calendar_With_Notes.Utilities;
 
 namespace WPF_Calendar_With_Notes.Model
 {
-
-    public class CalendarEngine : INotifyPropertyChanged, IListener
+    public class CalendarEngine : INotifyPropertyChanged, IListener, IData
     {
-
         private string m_LanguageName = "Language Information: " + CultureInfo.CurrentUICulture.DisplayName;
         public string LanguageName
         {
@@ -38,42 +36,87 @@ namespace WPF_Calendar_With_Notes.Model
             }
         }
 
+        private List<DateTime> m_DtList = new List<DateTime>();
+        public List<DateTime> DtList
+        {
+            get
+            {
+                return m_DtList;
+            }
+            set
+            {
+                m_DtList = value;
+            }
+        }
+
+
+
         private DateTime m_selected_date;
         public DateTime Selected_Date
         {
-            get { return m_selected_date; }
-            set { m_selected_date = value; WyslijPowiadomienie("Selected_Date"); }
+            get
+            {
+                return m_selected_date;
+            }
+
+            set
+            {
+                if (value != m_selected_date)
+                {
+                    m_selected_date = value;
+
+                    //W kontrolce Calendar, po kliknięciu
+                    //kolekcja dat przestaje byc zaznaczona
+                    //rozwiazanie: 1. Watek uaktualniajacy lub 2. powiadomienie MainWindow o potrzebie zaznaczenia
+                    DtList.Clear();
+                    DtList.Add(m_selected_date);
+                    foreach (var item in m_notesDB.Notes)
+                    {
+                        DtList.Add(item.Date);
+                    }
+
+                    m_Broker.FireEvent(EventType.SelectedDateChanged, this);
+
+                    UpdateOfPositions();
+
+                }
+            }
         }
 
         public ObservableCollection<PositionOfDay> Positions { get; set; }
+
+        MainWindow GUI;
 
         private IEventBroker m_Broker;
         public DAL.NotesContext m_notesDB;
         public CalendarEngine(IEventBroker broker)
         {
-
             m_Broker = broker;
+
+            m_Broker.RegisterFor(EventType.LanguageChanged, this);
 
             Positions = new ObservableCollection<PositionOfDay>();
 
+            m_notesDB = DAL.DBSingleton.Instancja;
+
             DateTime dt_tmp = DateTime.Now;
-            m_selected_date = new DateTime(dt_tmp.Year, dt_tmp.Month, dt_tmp.Day);
-
-            m_notesDB  = DAL.DBSingleton.Instancja;
-
-            m_Broker.RegisterFor(EventType.LanguageChanged, this);
+            Selected_Date = new DateTime(dt_tmp.Year, dt_tmp.Month, dt_tmp.Day);
         }
 
 
         public void NotifyMe(EventType type, object data)
         {
-            LanguageName = "Language Information: " + CultureInfo.CurrentUICulture.DisplayName;
+            if (type == EventType.LanguageChanged)
+            {
+                LanguageName = "Language Information: " + CultureInfo.CurrentUICulture.DisplayName;
+            }
+
         }
 
         public void UpdateOfPositions()
         {
             Positions.Clear();
-            List<Tuple<short, short, string>> lista = GetNotesForSelectedDay(Selected_Date);
+            List<Tuple<short, short, string>> lista = GetNotesForSelectedDay(m_selected_date);
 
             if (lista == null)
             {
@@ -84,7 +127,18 @@ namespace WPF_Calendar_With_Notes.Model
                 int i = 0;
                 lista.ForEach(tuple =>
                 {
-                    Positions.Add(new PositionOfDay() { CurrentHour = tuple.Item1, OldHour = tuple.Item1, CurrentMinute = tuple.Item2, OldMinute = tuple.Item2, CurrentNote = tuple.Item3, OldNote = tuple.Item3, NumberOfPosition = i++ });
+                    Positions.Add(new PositionOfDay()
+                    {
+                        CurrentHour = tuple.Item1,
+                        OldHour = tuple.Item1,
+                        CurrentMinute = tuple.Item2,
+                        OldMinute = tuple.Item2,
+                        CurrentNote = tuple.Item3,
+                        OldNote = tuple.Item3,
+                        NumberOfPosition = i++,
+                        //1,1,1 bo PositionOfDay korzysta tylko z hh:mm
+                        DateTimeVal = new DateTime(1, 1, 1, tuple.Item1, tuple.Item2, 0)
+                    });
                 });
 
                 NumberOfPositionForDataGrid = Positions.Count;
@@ -96,19 +150,14 @@ namespace WPF_Calendar_With_Notes.Model
         {
             List<Tuple<short, short, string>> retList1 = new List<Tuple<short, short, string>>();
 
-
-
-                foreach (var item in m_notesDB.Notes.Where(item => item.Date.Year == date.Year &&
-                                                            item.Date.Month == date.Month &&
-                                                            item.Date.Day == date.Day
-                                                            ).ToList())
-                {
-                    retList1.Add(new Tuple<short, short, string>((short)item.Date.Hour, (short)item.Date.Minute,
-                        item.Message));
-                }
-            
-
-
+            foreach (var item in m_notesDB.Notes.Where(item => item.Date.Year == date.Year &&
+                                                        item.Date.Month == date.Month &&
+                                                        item.Date.Day == date.Day
+                                                        ).ToList())
+            {
+                retList1.Add(new Tuple<short, short, string>((short)item.Date.Hour, (short)item.Date.Minute,
+                    item.Message));
+            }
 
             List<Tuple<short, short, string>> retList2
                 = retList1.OrderBy(a => a.Item1).ThenBy(a => a.Item2).ToList();
@@ -131,7 +180,6 @@ namespace WPF_Calendar_With_Notes.Model
 
         private int AddNote_ForDB_hlp(string _note, DateTime _date, short _hour, short _minute)
         {
-
             //m_DBNotatki.Database.ExecuteSqlCommand("delete from NotatkaEncja");
             Note n = new Note();
 
@@ -182,7 +230,6 @@ namespace WPF_Calendar_With_Notes.Model
 
         private int RemoveNoteFromDBhlp(DateTime date, short hour, short minute)
         {
-
             var year = date.Year;
             var month = date.Month;
             var day = date.Day;
@@ -198,12 +245,12 @@ namespace WPF_Calendar_With_Notes.Model
             {
                 m_notesDB.SaveChanges();
                 return 0;
-
             }
 
             return -1;
         }
 
+        //private List<DateTime> Notes2DT(not)
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -216,8 +263,12 @@ namespace WPF_Calendar_With_Notes.Model
             }
         }
 
+        ~CalendarEngine()
+        {
+            m_Broker.UnregisterFromAll(this);
+        }
+
 
     }
-
 
 }

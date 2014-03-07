@@ -92,6 +92,7 @@ namespace WPF_Calendar_With_Notes.Model
                 m_DateTimeVal = value;
                 m_CurrentHour = (short)m_DateTimeVal.Hour;
                 m_CurrentMinute = (short)m_DateTimeVal.Minute;
+                WyslijPowiadomienie("DateTimeVal");
             }
         }
         

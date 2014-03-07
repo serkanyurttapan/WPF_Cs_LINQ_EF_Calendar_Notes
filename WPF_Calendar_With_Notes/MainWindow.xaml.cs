@@ -26,11 +26,8 @@ namespace WPF_Calendar_With_Notes
     /// </summary>
     public partial class MainWindow : Window, IListener
     {
-        private ApplicationViewModel viewModel;
+        private ApplicationViewModel m_viewModel;
         public CalendarEngine engine { get; set; }
-        private Timer_CalendarPatch patch;
-        public Sem m_Sem = new Sem();
-
 
         public MainWindow()
         {
@@ -56,39 +53,56 @@ namespace WPF_Calendar_With_Notes
             string lang = culture.DisplayName;
 
             m_Broker = new EventBroker();
+            m_Broker.RegisterFor(EventType.LanguageChanged, this);
+            m_Broker.RegisterFor(EventType.SelectedDateChanged, this);
+
             engine = new CalendarEngine(m_Broker);
 
-            viewModel = new ApplicationViewModel(engine, m_Broker, dataGrid1);
+            m_viewModel = new ApplicationViewModel(engine, m_Broker, dataGrid1);
 
-            this.DataContext = viewModel;
+            this.DataContext = m_viewModel;
 
             bEditSelected.IsEnabled = false;
             bDeleteSelectedNote.IsEnabled = false;
 
-            m_Broker.RegisterFor(EventType.LanguageChanged, this);
-
             string cultureInformation = CultureInfo.CurrentCulture.Name;
 
             if (!cultureInformation.Equals("pl-PL"))
-                //new Utilities.Commands.ApplicationLanguageChangeCommand(m_Broker).Execute("en-GB");
-                viewModel.LanguageChangeCommand.Execute("en-GB");
-
-            //Łatka,bo
-            //gdy klikamy na kalendarz wtedy zaznaczone daty ulegają odznaczeniu,
-            //trzeba więc ponownie zaznaczyć w kalendarzu te daty,które były zaznaczone przed kliknięciem w kalendarz.
-            patch = new Timer_CalendarPatch(menu1, bAddNote, MainCalendar, engine, m_Sem);
+                m_viewModel.LanguageChangeCommand.Execute("en-GB");
         }
 
+
+
+        List<DateTime> m_DtList;
         public void NotifyMe(EventType type, object data)
         {
-            var lDGridBindingExpr = lDataGridDescription.GetBindingExpression(Label.ContentProperty);
-            if (lDGridBindingExpr != null) lDGridBindingExpr.UpdateTarget();
+            if (type == EventType.LanguageChanged)
+            {
+                var lDGridBindingExpr = lDataGridDescription.GetBindingExpression(Label.ContentProperty);
+                if (lDGridBindingExpr != null) lDGridBindingExpr.UpdateTarget();
 
-            var tBlockBindingExpr = DateTextBlock.GetBindingExpression(TextBlock.TextProperty);
-            if (tBlockBindingExpr != null) tBlockBindingExpr.UpdateTarget();
+                var tBlockBindingExpr = DateTextBlock.GetBindingExpression(TextBlock.TextProperty);
+                if (tBlockBindingExpr != null) tBlockBindingExpr.UpdateTarget();
 
-            var tBlock1BindingExpr = textBlock1.GetBindingExpression(TextBlock.TextProperty);
-            if (tBlock1BindingExpr != null) tBlock1BindingExpr.UpdateTarget();
+                var tBlock1BindingExpr = textBlock1.GetBindingExpression(TextBlock.TextProperty);
+                if (tBlock1BindingExpr != null) tBlock1BindingExpr.UpdateTarget();
+            }
+            else
+                if (type == EventType.SelectedDateChanged)
+                {
+                    m_DtList = ((IData)data).DtList;
+
+                    //foreach (var item in m_DtList)
+                    //{
+                    //    DateTime dt = new DateTime(item.Date.Year, item.Date.Month, item.Date.Day);
+                    //    MainCalendar.SelectedDates.Add(dt);
+                    //}
+
+                    //menu1.Focus();
+                    //bAddNote.Focus();                
+
+                }
+
         }
 
         void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -108,26 +122,11 @@ namespace WPF_Calendar_With_Notes
             Closing -= MainWindow_Closing;
             Closed -= MainWindow_Closed;
 
-            patch.Timer.Tick -= patch.Timer_Tick;
-        }
-
-        private void MainCalendar_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            if (m_Sem.uzywany == false)
-            {
-                if (MainCalendar.SelectedDate != null)
-                {
-                    engine.Selected_Date = (DateTime)MainCalendar.SelectedDate;
-                    engine.UpdateOfPositions();
-                    m_Sem.zrobione = 0;
-                }
-            }
+            m_Broker.UnregisterFromAll(this);
         }
 
         private void dataGrid1_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-
             //uzyć Binding do zmiany "IsEnabled"
             if (engine.Positions.Count == 0)
             {
@@ -139,7 +138,6 @@ namespace WPF_Calendar_With_Notes
                 bEditSelected.IsEnabled = true;
                 bDeleteSelectedNote.IsEnabled = true;
             }
-
         }
 
         private void dataGrid1_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
@@ -178,20 +176,28 @@ namespace WPF_Calendar_With_Notes
             this.Close();
         }
 
-
-    }
-
-
-    public class Sem
-    {
-        public bool uzywany { get; set; }
-        public int zrobione { get; set; }
-
-        public Sem()
+        //W kontrolce Calendar, po kliknięciu
+        //kolekcja dat przestaje byc zaznaczona
+        //rozwiazanie: 1. Watek uaktualniajacy lub 2. powiadomienie MainWindow o potrzebie zaznaczenia
+        //Żadne z nich nie jest idealne,obecnie wybrałem rozwiązanie 2.
+        private void MainCalendar_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
         {
-            uzywany = false;
-            zrobione = 0;
+            if (m_DtList != null)
+            {
+                foreach (var item in m_DtList)
+                {
+                    DateTime dt = new DateTime(item.Date.Year, item.Date.Month, item.Date.Day);
+                    MainCalendar.SelectedDates.Add(dt);
+                }
+            }
+
+            //Focus w kalendarzu nie pracuje prawidlowo:
+            //po opuszczeniu kontrolki Calendar, focus znika
+            menu1.Focus();
+            bAddNote.Focus();
+
         }
+
     }
 
 }

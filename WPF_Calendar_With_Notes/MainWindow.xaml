@@ -65,8 +65,9 @@
             <Calendar SelectedDate="{Binding Path=engine.Selected_Date, Mode=TwoWay}" 
                       SelectionMode="MultipleRange" 
                       IsTodayHighlighted="True" Height="165" Width="180" Margin="24,55,0,0" 
-                      Name="MainCalendar" VerticalAlignment="Top" 
-                      SelectedDatesChanged="MainCalendar_SelectedDateChanged" HorizontalAlignment="Left" />
+                      Name="MainCalendar" VerticalAlignment="Top"
+                      SelectedDatesChanged="MainCalendar_SelectedDatesChanged"
+                      HorizontalAlignment="Left" />
 
             <Label Content="{Binding ChoosingDay, Source={StaticResource Resources}}" Height="30" Width="106" FontFamily="Tahoma" FontSize="14" HorizontalAlignment="Left" 
                Margin="65,24,0,0" Name="label1" VerticalAlignment="Top"/>

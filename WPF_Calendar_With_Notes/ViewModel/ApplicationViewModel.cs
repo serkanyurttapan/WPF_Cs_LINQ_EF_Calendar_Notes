@@ -50,6 +50,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
             Thread.CurrentThread.CurrentUICulture = currentUiCulture;
             Thread.CurrentThread.CurrentCulture = currentUiCulture;
 
+
             i18nManager.ChangeCulture(currentUiCulture);
 
             m_Broker.FireEvent(EventType.LanguageChanged, new object());
@@ -79,7 +80,13 @@ namespace WPF_Calendar_With_Notes.ViewModel
         void NewNoteAction(object parameter)
         {
             
-            PositionOfDay pozycja = new PositionOfDay() { CurrentHour = 0, CurrentMinute = 0, CurrentNote = String.Empty };
+            PositionOfDay pozycja = new PositionOfDay() 
+            { 
+                
+                CurrentHour = 0, CurrentMinute = 0, CurrentNote = String.Empty,
+                //1,1,1 bo PositionOfDay korzysta tylko z hh:mm
+                DateTimeVal = new DateTime(1, 1, 1, 0, 0, 0)
+            };
 
             WindowOfPositions okno = new WindowOfPositions(pozycja, engine);
             var x = okno.ShowDialog().Value;
@@ -97,10 +104,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
                     }
 
                 engine.UpdateOfPositions();
-
-            }
-
-            
+            }            
 
         }
 
@@ -116,7 +120,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
                     {
                         CurrentHour = selectedPosition.CurrentHour,
                         CurrentMinute = selectedPosition.CurrentMinute,
-                        CurrentNote = selectedPosition.CurrentNote
+                        CurrentNote = selectedPosition.CurrentNote,
                     };
 
                     WindowOfPositions okno = new WindowOfPositions(selectedPosition, engine);
@@ -125,7 +129,8 @@ namespace WPF_Calendar_With_Notes.ViewModel
                     {
                         engine.RemoveNoteFromDB(primary.CurrentHour, primary.CurrentMinute);
 
-                        if (selectedPosition.CurrentNote.Length >= 498) selectedPosition.CurrentNote = selectedPosition.CurrentNote.Remove(498);
+                        if (selectedPosition.CurrentNote.Length >= 498) 
+                            selectedPosition.CurrentNote = selectedPosition.CurrentNote.Remove(498);
 
                         engine.AddNoteToDB(selectedPosition.CurrentNote, selectedPosition.CurrentHour, selectedPosition.CurrentMinute);
 

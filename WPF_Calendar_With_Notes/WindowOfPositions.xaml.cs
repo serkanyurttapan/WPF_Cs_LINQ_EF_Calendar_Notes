@@ -23,6 +23,7 @@ namespace WPF_Calendar_With_Notes
     {
 
         private PositionOfDay m_pozycja;
+        
         private DateTime m_date;
         private CalendarEngine m_cal_engine;
 
@@ -34,7 +35,6 @@ namespace WPF_Calendar_With_Notes
         public WindowOfPositions(PositionOfDay _pozycja, CalendarEngine _c_engine)
             : this()
         {
-            Loaded += WindowOfPositions_Loaded;
             m_pozycja = _pozycja;
             DataContext = m_pozycja;
 
@@ -42,11 +42,6 @@ namespace WPF_Calendar_With_Notes
             m_date = m_cal_engine.Selected_Date;
 
             textBlock1.Text = m_date.ToString().Remove(10) + m_date.ToString(" (dddd)");
-        }
-
-        void WindowOfPositions_Loaded(object sender, RoutedEventArgs e)
-        {
-            this.timePicker1.Value= new DateTime(1,1,1,m_pozycja.CurrentHour,m_pozycja.CurrentMinute,0);
         }
 
         private void bSave_Click(object sender, RoutedEventArgs e)
@@ -68,7 +63,6 @@ namespace WPF_Calendar_With_Notes
                     }
                     else
                         return;
-
             }
             else
             {
