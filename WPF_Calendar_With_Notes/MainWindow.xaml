@@ -2,9 +2,8 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Converters="clr-namespace:WPF_Calendar_With_Notes.Utilities.Converters" 
-        xmlns:VM="clr-namespace:WPF_Calendar_With_Notes.ViewModel"
-        
-        Title="{Binding MainWindowTitle,Source={StaticResource Resources}}" 
+        xmlns:VM="clr-namespace:WPF_Calendar_With_Notes.ViewModel"        
+        Title="{Binding MainWindowTitle,Source={StaticResource Resources}}"
         Height="517" Width="785">
 
     <Window.Resources>

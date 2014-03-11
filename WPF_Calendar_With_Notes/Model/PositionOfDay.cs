@@ -58,7 +58,6 @@ namespace WPF_Calendar_With_Notes.Model
             set
             {
                 m_CurrentMinute = value;
-                //m_DateTimeVal.Minute = m_CurrentMinute;// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                 WyslijPowiadomienie("CurrentMinute");
             }
         }
@@ -140,7 +139,6 @@ namespace WPF_Calendar_With_Notes.Model
                             return "Notatka za długa. Max długość notatki to 498 znaków";
                         }
                         break;
-
 
                 }
                 return "";

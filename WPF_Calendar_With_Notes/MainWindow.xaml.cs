@@ -91,6 +91,16 @@ namespace WPF_Calendar_With_Notes
                 if (type == EventType.SelectedDateChanged)
                 {
                     m_DtList = ((IData)data).DtList;
+
+                    //foreach (var item in m_DtList)
+                    //{
+                    //    DateTime dt = new DateTime(item.Date.Year, item.Date.Month, item.Date.Day);
+                    //    MainCalendar.SelectedDates.Add(dt);
+                    //}
+
+                    //menu1.Focus();
+                    //bAddNote.Focus();                
+
                 }
 
         }
@@ -158,7 +168,22 @@ namespace WPF_Calendar_With_Notes
                         engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
                     }
                 }
+
+                engine.UpdateOfPositions();
             }
+            else
+                if (e.Key == Key.Escape)
+                {
+                    PositionOfDay PosOfDay = Grid.SelectedItem as PositionOfDay;
+                    if (PosOfDay != null)
+                    {
+                        engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+                        if (!PosOfDay.OldNote.Equals(string.Empty))
+                            engine.AddNoteToDB(PosOfDay.OldNote, PosOfDay.OldHour, PosOfDay.OldMinute);
+                        engine.UpdateOfPositions();
+                    }
+                }
+
         }
 
         private void bQuit_Click(object sender, RoutedEventArgs e)

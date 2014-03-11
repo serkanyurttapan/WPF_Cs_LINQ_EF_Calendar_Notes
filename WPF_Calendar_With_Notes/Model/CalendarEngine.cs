@@ -50,7 +50,6 @@ namespace WPF_Calendar_With_Notes.Model
         }
 
 
-
         private DateTime m_selected_date;
         public DateTime Selected_Date
         {
@@ -110,15 +109,16 @@ namespace WPF_Calendar_With_Notes.Model
             {
                 LanguageName = "Language Information: " + CultureInfo.CurrentUICulture.DisplayName;
             }
-
         }
 
         public void UpdateOfPositions()
         {
-            Positions.Clear();
+
+            if (Positions.Count != 0)
+                Positions.Clear();
             List<Tuple<short, short, string>> lista = GetNotesForSelectedDay(m_selected_date);
 
-            if (lista == null)
+            if (lista.Count == 0)
             {
                 NumberOfPositionForDataGrid = 0;
             }
@@ -136,8 +136,8 @@ namespace WPF_Calendar_With_Notes.Model
                         CurrentNote = tuple.Item3,
                         OldNote = tuple.Item3,
                         NumberOfPosition = i++,
-                        //1,1,1 bo PositionOfDay korzysta tylko z hh:mm
-                        DateTimeVal = new DateTime(1, 1, 1, tuple.Item1, tuple.Item2, 0)
+                        DateTimeVal = new DateTime(Selected_Date.Year, Selected_Date.Month, Selected_Date.Day,
+                            tuple.Item1, tuple.Item2, 0)
                     });
                 });
 
@@ -168,15 +168,35 @@ namespace WPF_Calendar_With_Notes.Model
 
         public int AddNoteToDB(string note, short hour, short minute)
         {
-            int res2 = -1;
+            int res = DateHourMinute_Busy(Selected_Date, hour, minute);
+            if (res > 0) return -1;
 
-            res2 = AddNote_ForDB_hlp(note, Selected_Date, hour, minute);
+            int res2 = AddNote_ForDB_hlp(note, Selected_Date, hour, minute);
 
             if (res2 == 0) return 0;
-
             else
-                return -1;
+                return -2;
         }
+
+        public int DateHourMinute_Busy(DateTime date, short hour, short minute)
+        {
+            int count = m_notesDB.Notes.Where(item =>
+                item.Date.Year == date.Year
+                &&
+                item.Date.Month == date.Month
+                &&
+                item.Date.Day == date.Day
+                &&
+                item.Date.Hour == hour
+                &&
+                item.Date.Minute == minute
+                ).ToList().Count;
+
+            if (count == 0) return 0;
+            else
+                return count;
+        }
+
 
         private int AddNote_ForDB_hlp(string _note, DateTime _date, short _hour, short _minute)
         {
@@ -194,28 +214,6 @@ namespace WPF_Calendar_With_Notes.Model
             var i = m_notesDB.SaveChanges();
 
             return 0;
-        }
-
-
-        public int DateHourMinute_Busy(DateTime date, short hour, short minute)
-        {
-            DateTime Date_tmp = new DateTime(date.Year, date.Month, date.Day);
-
-            var q = m_notesDB.Notes.Where(item =>
-                item.Date.Year == date.Year
-                &&
-                item.Date.Month == date.Month
-                &&
-                item.Date.Day == date.Day
-                &&
-                item.Date.Hour == date.Hour
-                &&
-                item.Date.Minute == date.Minute
-                );
-
-            if (q != null) return 1;
-            else
-                return 0;
         }
 
 
@@ -247,10 +245,8 @@ namespace WPF_Calendar_With_Notes.Model
                 return 0;
             }
 
-            return -1;
+            return 0;
         }
-
-        //private List<DateTime> Notes2DT(not)
 
         public event PropertyChangedEventHandler PropertyChanged;
 

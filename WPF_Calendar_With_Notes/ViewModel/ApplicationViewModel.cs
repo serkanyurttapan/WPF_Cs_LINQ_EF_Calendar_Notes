@@ -21,7 +21,6 @@ namespace WPF_Calendar_With_Notes.ViewModel
         private DataGrid m_DataGrid;
         private IEventBroker m_Broker;
 
-        //public PositionOfDay selectedPos { get; set; }
         public Func<object, bool> m_true = new Func<object, bool>(o => { return true; });
         public ICommand LanguageChangeCommand { get; set; }
         public ICommand HelpCommand { get; set; }
@@ -114,8 +113,6 @@ namespace WPF_Calendar_With_Notes.ViewModel
             foreach (var row in m_DataGrid.SelectedItems)
             {
                 PositionOfDay selectedPosition = row as PositionOfDay;
-                if (selectedPosition != null)
-                {
                     PositionOfDay primary = new PositionOfDay()
                     {
                         CurrentHour = selectedPosition.CurrentHour,
@@ -135,32 +132,29 @@ namespace WPF_Calendar_With_Notes.ViewModel
                         engine.AddNoteToDB(selectedPosition.CurrentNote, selectedPosition.CurrentHour, selectedPosition.CurrentMinute);
 
                     }
-                }
-                else//selectedPosition == null
-                {
-                    PositionOfDay pozycja = new PositionOfDay() { CurrentHour = 0, CurrentMinute = 0, CurrentNote = String.Empty };
+                //else//selectedPosition == null
+                //{
+                //    PositionOfDay pozycja = new PositionOfDay() { CurrentHour = 0, CurrentMinute = 0, CurrentNote = String.Empty };
 
-                    WindowOfPositions okno = new WindowOfPositions(pozycja, engine);
-                    var x = okno.ShowDialog().Value;
-                    if (x)
-                    {
-                        if (pozycja.CurrentNote.Length >= 498) pozycja.CurrentNote = pozycja.CurrentNote.Remove(498);
+                //    WindowOfPositions okno = new WindowOfPositions(pozycja, engine);
+                //    var x = okno.ShowDialog().Value;
+                //    if (x)
+                //    {
+                //        if (pozycja.CurrentNote.Length >= 498) pozycja.CurrentNote = pozycja.CurrentNote.Remove(498);
 
-                        int res = engine.AddNoteToDB(pozycja.CurrentNote, pozycja.CurrentHour, pozycja.CurrentMinute);
+                //        int res = engine.AddNoteToDB(pozycja.CurrentNote, pozycja.CurrentHour, pozycja.CurrentMinute);
 
-                        if (res == -1)
-                            if (MessageBox.Show(Properties.Resources.CurrentNoteBusy, Properties.Resources.ReplaceNote, MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
-                            {
-                                engine.RemoveNoteFromDB(pozycja.CurrentHour, pozycja.CurrentMinute);
-                                engine.AddNoteToDB(pozycja.CurrentNote, pozycja.CurrentHour, pozycja.CurrentMinute);
+                //        if (res == -1)
+                //            if (MessageBox.Show(Properties.Resources.CurrentNoteBusy, Properties.Resources.ReplaceNote, MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
+                //            {
+                //                engine.RemoveNoteFromDB(pozycja.CurrentHour, pozycja.CurrentMinute);
+                //                engine.AddNoteToDB(pozycja.CurrentNote, pozycja.CurrentHour, pozycja.CurrentMinute);
 
-                            }
-                    }
-                }
+                //            }
+                //    }
+                //}
             }
-            engine.UpdateOfPositions();
-
-            
+            engine.UpdateOfPositions();            
         }
 
     }

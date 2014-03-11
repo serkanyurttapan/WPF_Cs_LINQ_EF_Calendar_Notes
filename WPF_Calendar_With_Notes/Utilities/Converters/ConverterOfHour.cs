@@ -27,11 +27,18 @@ namespace WPF_Calendar_With_Notes.Utilities.Converters
                 return 0;
             }
 
-            if (val < 0 || val > 23)
+            if (val < 0)
             {
-                MessageBox.Show("This is not proper hour");
                 return 0;
             }
+
+            if (val > 23)
+            {
+                return 23;
+            }
+
+
+
 
             return val;
         }
