@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace WPF_Calendar_With_Notes.DAL
 {
-    public class NotesInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<NotesContext>//.CreateDatabaseIfNotExists<NotesContext>
+    public class NotesInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<NotesContext> //.CreateDatabaseIfNotExists<NotesContext>
     {
         protected override void Seed(NotesContext context)
         {
