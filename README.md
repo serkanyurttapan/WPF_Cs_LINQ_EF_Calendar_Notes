@@ -6,7 +6,7 @@ New features and old staff includes:
 
 - new model class: FieldsOfDataGrid.cs
 
--*.mdf Data Base type with Code First approach (reqiures VISUAL STUDIO 2013)
+ *.mdf Data Base type with Code First approach (reqiures VISUAL STUDIO 2013)
 
 -EF 6.0 for best usage
 
