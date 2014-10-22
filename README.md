@@ -1,6 +1,3 @@
-IMPORTANT !!!
-Data Base assumption: Project assumes local Data Base EXISTS !!!
-
 C# Language project showing MVVM pattern in simple project: Calendar with Notes. The project enable User to store notes in LocalDB according to the calendar dates in VS 2013
 
 New features and old staff includes:
