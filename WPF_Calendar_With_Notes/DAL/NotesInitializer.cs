@@ -8,15 +8,15 @@ using System.Data.Entity;
 
 namespace WPF_Calendar_With_Notes.DAL
 {
-    public class NotesInitializer : System.Data.Entity.CreateDatabaseIfNotExists<NotesContext>
+    public class NotesInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<NotesContext>//.CreateDatabaseIfNotExists<NotesContext>
     {
         protected override void Seed(NotesContext context)
         {
             var notes = new List<Note>
             {
-                new Note {Date=DateTime.Now,Message="Plan"}
+                new Note {Date=DateTime.Now,Message="Plan", User=Environment.UserName}
             };
-            notes.ForEach(n=>context.Notes.Add(n));
+            notes.ForEach(n => context.Notes.Add(n));
             context.SaveChanges();
         }
     }

@@ -68,19 +68,21 @@
                       SelectedDatesChanged="MainCalendar_SelectedDatesChanged"
                       HorizontalAlignment="Left" />
 
-            <Label Content="{Binding ChoosingDay, Source={StaticResource Resources}}" Height="30" Width="106" FontFamily="Tahoma" FontSize="14" HorizontalAlignment="Left" 
-               Margin="65,24,0,0" Name="label1" VerticalAlignment="Top"/>
+            <Label Content="{Binding ChoosingDay, Source={StaticResource Resources}}" Height="30" Width="110" FontFamily="Tahoma" FontSize="14" HorizontalAlignment="Left" 
+               Margin="71,24,0,0" Name="label1" VerticalAlignment="Top"/>
 
             <Label Content="{Binding ElementName=MainCalendar, 
                     Path=SelectedDate, Converter={StaticResource DataGridDescriptionDateConverter} }" 
-                   Height="30" Width="290" FontFamily="Tahoma" 
-                   FontSize="14" HorizontalAlignment="Left" Margin="353,24,0,0" Name="lDataGridDescription" VerticalAlignment="Top"/>
+                   
+                   
+                   Height="30" Width="307" FontFamily="Tahoma" 
+                   FontSize="14" HorizontalAlignment="Left" Margin="368,24,0,0" Name="lDataGridDescription" VerticalAlignment="Top"/>
 
             <DataGrid
                 PreviewKeyDown="dataGrid1_PreviewKeyDown" RowEditEnding="dataGrid1_RowEditEnding" 
                       IsReadOnly="False" ItemsSource="{Binding Path=engine.Positions}" AutoGenerateColumns="False" 
                       HorizontalAlignment="Left" SelectedCellsChanged="dataGrid1_SelectedCellsChanged"
-                  Height="330"  Margin="230,55,0,0" Width="470" FontSize="12" Name="dataGrid1" VerticalAlignment="Top"  >
+                  Height="330"  Margin="230,55,0,0" Width="520" FontSize="12" Name="dataGrid1" VerticalAlignment="Top"  >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="{Binding Hour, Source={StaticResource Resources}}"                                         
                                         Binding="{Binding Path=CurrentHour, 
@@ -92,25 +94,33 @@
                                         Binding="{Binding Path=CurrentMinute, 
                         UpdateSourceTrigger=PropertyChanged, 
                         Converter={StaticResource InstanceOfMinute},
-                        ValidatesOnDataErrors=True}" Width="30" />
+                        ValidatesOnDataErrors=True}" Width="35" />
 
                     <DataGridTextColumn Header="{Binding Note, Source={StaticResource Resources}}"                                         
                                         Binding="{Binding Path=CurrentNote, 
                         UpdateSourceTrigger=PropertyChanged, 
                         Converter={StaticResource InstanceOfNote},                        
-                        ValidatesOnDataErrors=True}" MinWidth="350" />
+                        ValidatesOnDataErrors=True}" MinWidth="340" />
+
+                    <DataGridTextColumn Header="{Binding User, Source={StaticResource Resources}}"                                         
+                                        Binding="{Binding Path=CurrentUser, 
+                        UpdateSourceTrigger=PropertyChanged, 
+                        Converter={StaticResource InstanceOfNote},                        
+                        ValidatesOnDataErrors=True}" MinWidth="90" />
+
+
 
                 </DataGrid.Columns>
             </DataGrid>
 
 
             <Button Content="{Binding EditSelected, Source={StaticResource Resources}}" HorizontalAlignment="Left" Name="bEditSelected" VerticalAlignment="Top" FontSize="12"
-                Height="24"  Margin="405,390,0,0"  Width="120" Command="{Binding EditSelectedNoteCommand}" />
+                Height="24"  Margin="422,390,0,0"  Width="130" Command="{Binding EditSelectedNoteCommand}" />
 
             <Button Content="{Binding RemoveSelectedNote, Source={StaticResource Resources}}" HorizontalAlignment="Left" Name="bDeleteSelectedNote" VerticalAlignment="Top" FontSize="12"
-                Height="24"  Margin="580,390,0,0"  Width="120" Command="{Binding DeleteSelectedNoteCommand}" />
+                Height="24"  Margin="620,390,0,0"  Width="130" Command="{Binding DeleteSelectedNoteCommand}" />
 
-            <Button Content="{Binding AddNewNote, Source={StaticResource Resources}}" HorizontalAlignment="Left" Name="bAddNote" VerticalAlignment="Top" FontSize="12" Height="24" Margin="230,390,0,0" Width="120" Command="{Binding NewNoteCommand}" />
+            <Button Content="{Binding AddNewNote, Source={StaticResource Resources}}" HorizontalAlignment="Left" Name="bAddNote" VerticalAlignment="Top" FontSize="12" Height="24" Margin="230,390,0,0" Width="130" Command="{Binding NewNoteCommand}" />
 
         </Grid>
 

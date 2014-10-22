@@ -116,62 +116,72 @@ namespace WPF_Calendar_With_Notes.Model
 
             if (Positions.Count != 0)
                 Positions.Clear();
-            List<Tuple<short, short, string>> lista = GetNotesForSelectedDay(m_selected_date);
 
-            if (lista.Count == 0)
+            IEnumerable<FieldsOfDataGrid> _list = GetNotesForSelectedDay(m_selected_date);
+
+            if (_list.Count() == 0)
             {
                 NumberOfPositionForDataGrid = 0;
             }
             else
             {
                 int i = 0;
-                lista.ForEach(tuple =>
+                foreach (var rowOfDataGrid in _list)
                 {
                     Positions.Add(new PositionOfDay()
                     {
-                        CurrentHour = tuple.Item1,
-                        OldHour = tuple.Item1,
-                        CurrentMinute = tuple.Item2,
-                        OldMinute = tuple.Item2,
-                        CurrentNote = tuple.Item3,
-                        OldNote = tuple.Item3,
+                        CurrentHour = rowOfDataGrid.Hour,
+                        OldHour = rowOfDataGrid.Hour,
+                        CurrentMinute = rowOfDataGrid.Minute,
+                        OldMinute = rowOfDataGrid.Minute,
+                        CurrentNote = rowOfDataGrid.Note,
+                        OldNote = rowOfDataGrid.Note,
+
+                        CurrentUser = rowOfDataGrid.User,
+                        OldUser = rowOfDataGrid.User,
+
                         NumberOfPosition = i++,
                         DateTimeVal = new DateTime(Selected_Date.Year, Selected_Date.Month, Selected_Date.Day,
-                            tuple.Item1, tuple.Item2, 0)
+                            rowOfDataGrid.Hour, rowOfDataGrid.Minute, 0)
                     });
-                });
+                }
 
                 NumberOfPositionForDataGrid = Positions.Count;
             }
         }
 
 
-        public List<Tuple<short, short, string>> GetNotesForSelectedDay(DateTime date)
+        public IEnumerable<FieldsOfDataGrid> GetNotesForSelectedDay(DateTime date)
         {
-            List<Tuple<short, short, string>> retList1 = new List<Tuple<short, short, string>>();
+            List<FieldsOfDataGrid> retList1 = new List<FieldsOfDataGrid>();
 
             foreach (var item in m_notesDB.Notes.Where(item => item.Date.Year == date.Year &&
                                                         item.Date.Month == date.Month &&
                                                         item.Date.Day == date.Day
                                                         ).ToList())
             {
-                retList1.Add(new Tuple<short, short, string>((short)item.Date.Hour, (short)item.Date.Minute,
-                    item.Message));
+                retList1.Add(new FieldsOfDataGrid()
+                {
+                    Hour = (short)item.Date.Hour,
+                    Minute = (short)item.Date.Minute,
+                    Note = item.Message,
+                    User = item.User
+                });
+
             }
 
-            List<Tuple<short, short, string>> retList2
-                = retList1.OrderBy(a => a.Item1).ThenBy(a => a.Item2).ToList();
+            var retList2 = retList1.OrderBy(item => item.Hour).ThenBy(item => item.Minute);
 
             return retList2;
         }
 
 
-        public int AddNoteToDB(string note, short hour, short minute)
+        public int AddNoteToDB(FieldsOfDataGrid fodg)
         {
-            int res = DateHourMinute_Busy(Selected_Date, hour, minute);
+            int res = DateHourMinute_Busy(Selected_Date, fodg.Hour, fodg.Minute);
             if (res > 0) return -1;
 
-            int res2 = AddNote_ForDB_hlp(note, Selected_Date, hour, minute);
+            int res2 = AddNote_ForDB_hlp(Selected_Date, fodg);
 
             if (res2 == 0) return 0;
             else
@@ -198,16 +208,17 @@ namespace WPF_Calendar_With_Notes.Model
         }
 
 
-        private int AddNote_ForDB_hlp(string _note, DateTime _date, short _hour, short _minute)
+        private int AddNote_ForDB_hlp(DateTime _dt, FieldsOfDataGrid fodg)
         {
-            //m_DBNotatki.Database.ExecuteSqlCommand("delete from NotatkaEncja");
-            Note n = new Note();
-
             //n.Note_Id = Guid.NewGuid();//baza sdf
-            n.Message = _note;
+            //m_DBNotatki.Database.ExecuteSqlCommand("delete from NotatkaEncja");
 
-            DateTime dt = new DateTime(_date.Year, _date.Month, _date.Day, _hour, _minute, 0);
-            n.Date = dt;
+            Note n = new Note()
+            {
+                Message = fodg.Note,
+                User = fodg.User,
+                Date = new DateTime(_dt.Year, _dt.Month, _dt.Day, fodg.Hour, fodg.Minute, 0)
+            };
 
             m_notesDB.Notes.Add(n);
 
@@ -264,7 +275,10 @@ namespace WPF_Calendar_With_Notes.Model
             m_Broker.UnregisterFromAll(this);
         }
 
-
     }
+
+
+
+
 
 }

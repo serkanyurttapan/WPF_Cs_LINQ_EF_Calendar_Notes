@@ -41,7 +41,10 @@ namespace WPF_Calendar_With_Notes
             m_cal_engine = _c_engine;
             m_date = m_cal_engine.Selected_Date;
 
-            textBlock1.Text = m_date.ToString().Remove(10) + m_date.ToString(" (dddd)");
+            tbDate.Text = m_date.ToString().Remove(10) + m_date.ToString(" (dddd)");
+
+            tbUser.Text = m_pozycja.CurrentUser;
+
         }
 
         private void bSave_Click(object sender, RoutedEventArgs e)

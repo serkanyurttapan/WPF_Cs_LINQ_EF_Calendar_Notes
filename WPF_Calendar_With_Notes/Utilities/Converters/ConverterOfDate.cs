@@ -21,6 +21,15 @@ namespace WPF_Calendar_With_Notes.Utilities.Converters
                 DateTime dt = (DateTime)value;
 
                 //string res = dt.ToString("yyyy-MM-dd (dddd)", new CultureInfo("pl-PL"));
+
+                //int d = 7123456;
+                //string doubleaValTest = d.ToString(CultureInfo.InvariantCulture);//5.05;
+                //string doubleaValTest = d.ToString(new CultureInfo("de-DE"));//5,05;
+                //string doubleaValTest = d.ToString(new CultureInfo("en-GB"));//5.05
+                //string doubleaValTest = d.ToString(new CultureInfo("pl-PL"));//5,05;
+                //MessageBox.Show(doubleaValTest);
+
+
                 string res = dt.ToString().Remove(10) + dt.ToString(" (dddd)");
 
                 res = string.Format("{0}: {1}", Properties.Resources.EditedDay, res);

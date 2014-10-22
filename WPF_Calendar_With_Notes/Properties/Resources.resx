@@ -166,7 +166,7 @@
     <value>Pomoc do programu Kalendarz z Notatkami</value>
   </data>
   <data name="Hour" xml:space="preserve">
-    <value>Hour</value>
+    <value>Godz</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Język</value>
@@ -218,5 +218,8 @@
   </data>
   <data name="Save" xml:space="preserve">
     <value>Zapisz</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Użytkownik</value>
   </data>
 </root>

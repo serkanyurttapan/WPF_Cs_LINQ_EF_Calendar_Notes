@@ -146,10 +146,21 @@ namespace WPF_Calendar_With_Notes
 
             if (PosOfDay.CurrentHour != PosOfDay.OldHour ||
                 PosOfDay.CurrentMinute != PosOfDay.OldMinute ||
-                !PosOfDay.CurrentNote.Equals(PosOfDay.OldNote))
+                !PosOfDay.CurrentNote.Equals(PosOfDay.OldNote) ||
+                !PosOfDay.CurrentUser.Equals(PosOfDay.OldUser)
+                )
             {
                 engine.RemoveNoteFromDB(PosOfDay.OldHour, PosOfDay.OldMinute);
-                engine.AddNoteToDB(PosOfDay.CurrentNote, PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+
+                var fodg = new FieldsOfDataGrid()
+                {
+                    Hour = PosOfDay.CurrentHour,
+                    Minute = PosOfDay.CurrentMinute,
+                    Note = PosOfDay.CurrentNote,
+                    User = PosOfDay.CurrentUser
+                };
+
+                engine.AddNoteToDB(fodg);
                 engine.UpdateOfPositions();
             }
         }
@@ -179,7 +190,17 @@ namespace WPF_Calendar_With_Notes
                     {
                         engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
                         if (!PosOfDay.OldNote.Equals(string.Empty))
-                            engine.AddNoteToDB(PosOfDay.OldNote, PosOfDay.OldHour, PosOfDay.OldMinute);
+                        {
+                            var fodg = new FieldsOfDataGrid()
+                            {
+                                Hour = PosOfDay.OldHour,
+                                Minute = PosOfDay.OldMinute,
+                                Note = PosOfDay.OldNote,
+                                User = PosOfDay.OldUser
+                            };
+
+                            engine.AddNoteToDB(fodg);
+                        }
                         engine.UpdateOfPositions();
                     }
                 }

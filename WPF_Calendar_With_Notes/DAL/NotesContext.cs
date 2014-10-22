@@ -11,7 +11,10 @@ namespace WPF_Calendar_With_Notes.DAL
     {
         public NotesContext() : base("NotesContext")
         {
-
+            //Database.SetInitializer<NotesContext>(new CreateDatabaseIfNotExists<NotesContext>());
+            //Database.SetInitializer<NotesContext>(new DropCreateDatabaseIfModelChanges<NotesContext>());
+            //Database.SetInitializer<NotesContext>(new DropCreateDatabaseAlways<NotesContext>());
+            //Database.SetInitializer<NotesContext>(new NotesInitializer());        
         }
 
         public DbSet<Model.Note> Notes { get; set; }

@@ -15,6 +15,29 @@ namespace WPF_Calendar_With_Notes.Model
 
         }
 
+
+        private string m_CurrentUser = "";
+        public string CurrentUser
+        {
+            get { return m_CurrentUser; }
+            set
+            {
+                m_CurrentUser = value;
+                WyslijPowiadomienie("CurrentUser");
+            }
+        }
+
+        private string m_OldUser = "";
+        public string OldUser
+        {
+            get { return m_OldUser; }
+            set
+            {
+                m_OldUser = value;
+            }
+        }
+
+
         private int m_NumberOfPosition;
         public int NumberOfPosition
         {

@@ -219,4 +219,7 @@
   <data name="Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
 </root>
