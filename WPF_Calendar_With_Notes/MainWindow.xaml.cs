@@ -161,8 +161,8 @@ namespace WPF_Calendar_With_Notes
                 };
 
                 engine.AddNoteToDB(fodg);
-                engine.UpdateOfPositions();
             }
+                engine.UpdateOfPositions();			
         }
 
 
