@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
-using WPF_Calendar_With_Notes.Model;
-using WPF_Calendar_With_Notes.ViewModel;
 using System.Globalization;
 using WPF_Calendar_With_Notes.CommonTypes;
+using Microsoft.Practices.Unity;
+using WPF_Calendar_With_Notes.ViewModel;
 
 
 namespace WPF_Calendar_With_Notes
@@ -32,6 +32,15 @@ namespace WPF_Calendar_With_Notes
         public MainWindow()
         {
             InitializeComponent();
+
+            var container = new UnityContainer();
+
+            //http://stackoverflow.com/questions/6283270/unity-container-registertypetfrom-tto-issues
+
+            //http://stackoverflow.com/questions/2911539/registertype-with-an-interface-in-unitycontainer
+            //when using ContainerControlledLifetimeManager then anyway you'll have to use 
+            //container.RegisterInstance<IDeviceImporter>(container.Resolve<IImporter>()); 
+            //container.RegisterType<IImporter, Importer1>();
 
             this.Loaded += new RoutedEventHandler(MainWindow_Loaded);
 
@@ -162,7 +171,7 @@ namespace WPF_Calendar_With_Notes
 
                 engine.AddNoteToDB(fodg);
             }
-                engine.UpdateOfPositions();		
+            engine.UpdateOfPositions();
         }
 
 

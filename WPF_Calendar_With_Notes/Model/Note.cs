@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF_Calendar_With_Notes.Model
+namespace WPF_Calendar_With_Notes
 {
     public class Note
     {

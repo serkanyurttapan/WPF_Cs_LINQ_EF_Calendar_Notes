@@ -97,15 +97,18 @@
     <Compile Include="CommonTypes\EventBroker.cs" />
     <Compile Include="CommonTypes\IData.cs" />
     <Compile Include="CommonTypes\IEventBroker.cs" />
+    <Compile Include="CommonTypes\INotesContext.cs" />
     <Compile Include="DAL\DBSingleton.cs" />
+    <Compile Include="DAL\FakeDAL\FakeNotesContext.cs" />
     <Compile Include="DAL\NotesInitializer.cs" />
+    <Compile Include="DAL\RealDAL\RealNotesContext.cs" />
+    <Compile Include="ErrorHandling\ActionResult.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\CalendarEngine.cs" />
     <Compile Include="Model\FieldsOfDataGrid.cs" />
     <Compile Include="Model\Note.cs" />
-    <Compile Include="DAL\NotesContext.cs" />
     <Compile Include="Model\PositionOfDay.cs" />
     <Compile Include="Utilities\CommandBase.cs" />
     <Compile Include="Utilities\Converters\ConverterOfDate.cs" />
@@ -187,6 +190,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

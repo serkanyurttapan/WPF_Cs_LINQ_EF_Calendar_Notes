@@ -5,16 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WPF_Calendar_With_Notes.Model
+namespace WPF_Calendar_With_Notes
 {
     public class PositionOfDay : INotifyPropertyChanged, IDataErrorInfo
     {
-
         public PositionOfDay()
         {
-
         }
-
 
         private string m_CurrentUser = "";
         public string CurrentUser
@@ -131,10 +128,9 @@ namespace WPF_Calendar_With_Notes.Model
             }
         }
 
-
         public string Error
         {
-            get { return "Postaraj się chcieć wpisać to dobrze"; }
+            get { return "Uncorrect or missing string"; }
         }
 
         public string this[string columnName]

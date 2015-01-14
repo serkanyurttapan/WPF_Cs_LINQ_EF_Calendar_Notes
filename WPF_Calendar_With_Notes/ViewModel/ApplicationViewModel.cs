@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WPF_Calendar_With_Notes.Model;
 using System.Windows.Input;
 using System.Windows.Controls;
 using WPF_Calendar_With_Notes.CommonTypes;

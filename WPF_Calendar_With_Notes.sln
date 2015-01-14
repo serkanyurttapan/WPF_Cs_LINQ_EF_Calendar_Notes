@@ -6,15 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Calendar_With_Notes", "WPF_Calendar_With_Notes\WPF_Calendar_With_Notes.csproj", "{E87440DC-5C07-481C-B45C-1D56DC22D995}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://ela-komputer:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = WPF_Calendar_With_Notes\\WPF_Calendar_With_Notes.csproj
-		SccProjectName1 = WPF_Calendar_With_Notes
-		SccLocalPath1 = WPF_Calendar_With_Notes
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

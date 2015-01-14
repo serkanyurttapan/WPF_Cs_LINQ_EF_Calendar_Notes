@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using WPF_Calendar_With_Notes.CommonTypes;
 using WPF_Calendar_With_Notes.Utilities;
+using System.Data.Entity;
+using WPF_Calendar_With_Notes.CommonTypes;
+using WPF_Calendar_With_Notes.DAL;
+using WPF_Calendar_With_Notes.DAL.RealDAL;
+using WPF_Calendar_With_Notes.DAL.FakeDAL;
 
-namespace WPF_Calendar_With_Notes.Model
+namespace WPF_Calendar_With_Notes
 {
     public class CalendarEngine : INotifyPropertyChanged, IListener, IData
     {
@@ -69,7 +73,7 @@ namespace WPF_Calendar_With_Notes.Model
                     //rozwiazanie: 1. Watek uaktualniajacy lub 2. powiadomienie MainWindow o potrzebie zaznaczenia
                     DtList.Clear();
                     DtList.Add(m_selected_date);
-                    foreach (var item in m_notesDB.Notes)
+                    foreach (var item in m_notesDB.BrokerNotes)
                     {
                         DtList.Add(item.Date);
                     }
@@ -77,17 +81,14 @@ namespace WPF_Calendar_With_Notes.Model
                     m_Broker.FireEvent(EventType.SelectedDateChanged, this);
 
                     UpdateOfPositions();
-
                 }
             }
         }
 
         public ObservableCollection<PositionOfDay> Positions { get; set; }
 
-        MainWindow GUI;
-
         private IEventBroker m_Broker;
-        public DAL.NotesContext m_notesDB;
+        public INotesContext<Note> m_notesDB;
         public CalendarEngine(IEventBroker broker)
         {
             m_Broker = broker;
@@ -96,7 +97,7 @@ namespace WPF_Calendar_With_Notes.Model
 
             Positions = new ObservableCollection<PositionOfDay>();
 
-            m_notesDB = DAL.DBSingleton.Instancja;
+            m_notesDB = DBSingleton<RealNotesContext>.Instancja;
 
             DateTime dt_tmp = DateTime.Now;
             Selected_Date = new DateTime(dt_tmp.Year, dt_tmp.Month, dt_tmp.Day);
@@ -155,7 +156,7 @@ namespace WPF_Calendar_With_Notes.Model
         {
             List<FieldsOfDataGrid> retList1 = new List<FieldsOfDataGrid>();
 
-            foreach (var item in m_notesDB.Notes.Where(item => item.Date.Year == date.Year &&
+            foreach (var item in m_notesDB.BrokerNotes.Where(item => item.Date.Year == date.Year &&
                                                         item.Date.Month == date.Month &&
                                                         item.Date.Day == date.Day
                                                         ).ToList())
@@ -190,7 +191,7 @@ namespace WPF_Calendar_With_Notes.Model
 
         public int DateHourMinute_Busy(DateTime date, short hour, short minute)
         {
-            int count = m_notesDB.Notes.Where(item =>
+            int count = m_notesDB.BrokerNotes.Where(item =>
                 item.Date.Year == date.Year
                 &&
                 item.Date.Month == date.Month
@@ -220,7 +221,7 @@ namespace WPF_Calendar_With_Notes.Model
                 Date = new DateTime(_dt.Year, _dt.Month, _dt.Day, fodg.Hour, fodg.Minute, 0)
             };
 
-            m_notesDB.Notes.Add(n);
+            m_notesDB.Add(n);
 
             var i = m_notesDB.SaveChanges();
 
@@ -243,11 +244,11 @@ namespace WPF_Calendar_With_Notes.Model
             var month = date.Month;
             var day = date.Day;
 
-            var q = m_notesDB.Notes.Where(item => item.Date.Year == year && item.Date.Month == month && item.Date.Day == day && item.Date.Hour == hour && item.Date.Minute == minute).ToList();
+            var q = m_notesDB.BrokerNotes.Where(item => item.Date.Year == year && item.Date.Month == month && item.Date.Day == day && item.Date.Hour == hour && item.Date.Minute == minute).ToList();
 
             foreach (var item in q)
             {
-                m_notesDB.Notes.Remove(item);
+                m_notesDB.Remove(item);
             }
 
             if (q.Count > 0)
