@@ -160,7 +160,7 @@
     <value>Pomoc</value>
   </data>
   <data name="HelpInformation" xml:space="preserve">
-    <value>Kalendarz z notatkami.\nZaznacz dzień, aby dopisać lub usunąć notatki.\nDodawanie notatek: Przycisk Dodaj Notatkę.\nEdytowanie: Przycisk Edytuj Zaznaczoną. Przyciski uaktywniają się,\npo zaznaczeniu notatki.</value>
+    <value>Kalendarz z notatkami.Zaznacz dzień, aby dopisać lub usunąć notatki.Dodawanie notatek: Przycisk Dodaj Notatkę.Edytowanie: Przycisk Edytuj Zaznaczoną. Przyciski uaktywniają się,po zaznaczeniu notatki.</value>
   </data>
   <data name="HelpInformationTitle" xml:space="preserve">
     <value>Pomoc do programu Kalendarz z Notatkami</value>

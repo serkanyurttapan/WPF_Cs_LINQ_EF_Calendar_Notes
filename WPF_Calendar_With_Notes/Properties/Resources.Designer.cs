@@ -187,7 +187,7 @@ namespace WPF_Calendar_With_Notes.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kalendarz z notatkami.\nZaznacz dzień, aby dopisać lub usunąć notatki.\nDodawanie notatek: Przycisk Dodaj Notatkę.\nEdytowanie: Przycisk Edytuj Zaznaczoną. Przyciski uaktywniają się,\npo zaznaczeniu notatki..
+        ///   Looks up a localized string similar to Kalendarz z notatkami.Zaznacz dzień, aby dopisać lub usunąć notatki.Dodawanie notatek: Przycisk Dodaj Notatkę.Edytowanie: Przycisk Edytuj Zaznaczoną. Przyciski uaktywniają się,po zaznaczeniu notatki..
         /// </summary>
         public static string HelpInformation {
             get {

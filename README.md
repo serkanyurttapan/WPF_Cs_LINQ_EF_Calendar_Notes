@@ -2,6 +2,8 @@ C# Language project showing MVVM pattern in simple project: Calendar with Notes.
 
 New features and old staff includes:
 
+- Fake Data Access Layer
+
 - Columns: Hour,Minute,Note,User
 
 - new model class: FieldsOfDataGrid.cs

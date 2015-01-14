@@ -160,7 +160,7 @@
     <value>Help</value>
   </data>
   <data name="HelpInformation" xml:space="preserve">
-    <value>Calendar with notes.\nSelect a day to add or remove note.\nAdding notes: button Add Note.\nEditing: button Edit Selected Note. Buttons are available \n after note is selected.</value>
+    <value>Calendar with notes.Select a day to add or remove note.Adding notes: button Add Note.Editing: button Edit Selected Note. Buttons are available after note is selected.</value>
   </data>
   <data name="HelpInformationTitle" xml:space="preserve">
     <value>Calendar With Notes help information.</value>

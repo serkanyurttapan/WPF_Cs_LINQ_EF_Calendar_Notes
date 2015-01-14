@@ -8,13 +8,13 @@ using WPF_Calendar_With_Notes.DAL.RealDAL;
 
 namespace WPF_Calendar_With_Notes.DAL
 {
-    public class NotesInitializer : System.Data.Entity.CreateDatabaseIfNotExists<RealNotesContext>        
+    public class NotesInitializer : System.Data.Entity.CreateDatabaseIfNotExists<RealNotesContext>
     {
         protected override void Seed(RealNotesContext context)
         {
             var notes = new List<Note>
             {
-                new Note {Date=DateTime.Now,Message="Plan", User=Environment.UserName}
+                new Note { Date=DateTime.Now, Message="Plan", User=Environment.UserName }
             };
             notes.ForEach(n => context.Add(n));
             context.SaveChanges();
