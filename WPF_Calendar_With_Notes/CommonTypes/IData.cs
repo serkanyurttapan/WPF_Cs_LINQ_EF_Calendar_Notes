@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace WPF_Calendar_With_Notes.CommonTypes
 {
-    interface IData
+    public interface IData
     {
-        List<DateTime> DtList { get; set; }    
+        List<DateTime> DtList { get; }
     }
 }

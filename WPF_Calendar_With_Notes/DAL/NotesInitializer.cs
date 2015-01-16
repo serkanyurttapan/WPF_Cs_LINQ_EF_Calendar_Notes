@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using WPF_Calendar_With_Notes.DAL.RealDAL;
+using WPF_Calendar_With_Notes.DAL;
 
 namespace WPF_Calendar_With_Notes.DAL
 {

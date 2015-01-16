@@ -10,8 +10,6 @@ using WPF_Calendar_With_Notes.Utilities;
 using System.Data.Entity;
 using WPF_Calendar_With_Notes.CommonTypes;
 using WPF_Calendar_With_Notes.DAL;
-using WPF_Calendar_With_Notes.DAL.RealDAL;
-using WPF_Calendar_With_Notes.DAL.FakeDAL;
 
 namespace WPF_Calendar_With_Notes
 {
@@ -46,10 +44,6 @@ namespace WPF_Calendar_With_Notes
             get
             {
                 return m_DtList;
-            }
-            set
-            {
-                m_DtList = value;
             }
         }
 
@@ -114,7 +108,6 @@ namespace WPF_Calendar_With_Notes
 
         public void UpdateOfPositions()
         {
-
             if (Positions.Count != 0)
                 Positions.Clear();
 
@@ -168,7 +161,6 @@ namespace WPF_Calendar_With_Notes
                     Note = item.Message,
                     User = item.User
                 });
-
             }
 
             var retList2 = retList1.OrderBy(item => item.Hour).ThenBy(item => item.Minute);
@@ -177,19 +169,18 @@ namespace WPF_Calendar_With_Notes
         }
 
 
-        public int AddNoteToDB(FieldsOfDataGrid fodg)
+        public ActionResult AddNoteToDB(FieldsOfDataGrid fodg)
         {
-            int res = DateHourMinute_Busy(Selected_Date, fodg.Hour, fodg.Minute);
-            if (res > 0) return -1;
+            int numberOfNotes = NumberOfNotesFor(Selected_Date, fodg.Hour, fodg.Minute);
+            if (numberOfNotes > 0)
+            {
+                return ActionResult.CreateFailResult(string.Format("There is already Note for Hour Minute {0}:{1}", fodg.Hour, fodg.Minute), ErrorType.DataAlreadyPresent);
+            }
 
-            int res2 = AddNote_ForDB_hlp(Selected_Date, fodg);
-
-            if (res2 == 0) return 0;
-            else
-                return -2;
+            return AddNoteToDB_hlp(Selected_Date, fodg);
         }
 
-        public int DateHourMinute_Busy(DateTime date, short hour, short minute)
+        public int NumberOfNotesFor(DateTime date, short hour, short minute)
         {
             int count = m_notesDB.BrokerNotes.Where(item =>
                 item.Date.Year == date.Year
@@ -203,13 +194,10 @@ namespace WPF_Calendar_With_Notes
                 item.Date.Minute == minute
                 ).ToList().Count;
 
-            if (count == 0) return 0;
-            else
-                return count;
+            return count;
         }
 
-
-        private int AddNote_ForDB_hlp(DateTime _dt, FieldsOfDataGrid fodg)
+        private ActionResult AddNoteToDB_hlp(DateTime _dt, FieldsOfDataGrid fodg)
         {
             //n.Note_Id = Guid.NewGuid();//baza sdf
             //m_DBNotatki.Database.ExecuteSqlCommand("delete from NotatkaEncja");
@@ -223,41 +211,46 @@ namespace WPF_Calendar_With_Notes
 
             m_notesDB.Add(n);
 
-            var i = m_notesDB.SaveChanges();
+            try
+            {
+                m_notesDB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                return ActionResult.CreateFailResult(e.Message,ErrorType.DataSavingFailedWhileAdding);
+            }
 
-            return 0;
+            return ActionResult.CreateSuccessResult();
         }
 
-
-        public int RemoveNoteFromDB(short hour, short minute)
+        public ActionResult RemoveNoteFromDB(short hour, short minute)
         {
-            int res1 = RemoveNoteFromDBhlp(Selected_Date, hour, minute);
-            if (res1 == 0)
-                return 0;
-            return -1;
+            return RemoveNoteFromDBhlp(Selected_Date, hour, minute);
         }
 
-
-        private int RemoveNoteFromDBhlp(DateTime date, short hour, short minute)
+        private ActionResult RemoveNoteFromDBhlp(DateTime date, short hour, short minute)
         {
             var year = date.Year;
             var month = date.Month;
             var day = date.Day;
 
-            var q = m_notesDB.BrokerNotes.Where(item => item.Date.Year == year && item.Date.Month == month && item.Date.Day == day && item.Date.Hour == hour && item.Date.Minute == minute).ToList();
+            var notesList = m_notesDB.BrokerNotes.Where(item => item.Date.Year == year && item.Date.Month == month && item.Date.Day == day && item.Date.Hour == hour && item.Date.Minute == minute).ToList();
 
-            foreach (var item in q)
+            foreach (var item in notesList)
             {
                 m_notesDB.Remove(item);
             }
 
-            if (q.Count > 0)
+            try
             {
                 m_notesDB.SaveChanges();
-                return 0;
+            }
+            catch (Exception e)
+            {
+                return ActionResult.CreateFailResult(e.Message, ErrorType.DataSavingFailedWhileRemoving);
             }
 
-            return 0;
+            return ActionResult.CreateSuccessResult();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -277,9 +270,4 @@ namespace WPF_Calendar_With_Notes
         }
 
     }
-
-
-
-
-
 }

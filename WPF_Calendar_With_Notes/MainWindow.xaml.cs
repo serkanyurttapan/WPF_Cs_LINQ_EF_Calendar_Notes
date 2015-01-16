@@ -159,7 +159,12 @@ namespace WPF_Calendar_With_Notes
                 !PosOfDay.CurrentUser.Equals(PosOfDay.OldUser)
                 )
             {
-                engine.RemoveNoteFromDB(PosOfDay.OldHour, PosOfDay.OldMinute);
+                ActionResult saveRes = engine.RemoveNoteFromDB(PosOfDay.OldHour, PosOfDay.OldMinute);
+                if (!saveRes.IsSuccess)
+                {
+                    MessageBox.Show(saveRes.ErrorMsg, "Error");
+                }
+
 
                 var fodg = new FieldsOfDataGrid()
                 {
@@ -169,7 +174,11 @@ namespace WPF_Calendar_With_Notes
                     User = PosOfDay.CurrentUser
                 };
 
-                engine.AddNoteToDB(fodg);
+                ActionResult addNoteResult = engine.AddNoteToDB(fodg);
+                if (!addNoteResult.IsSuccess)
+                {
+                    MessageBox.Show(addNoteResult.ErrorMsg, "Error");
+                }
             }
             engine.UpdateOfPositions();
         }
@@ -185,7 +194,11 @@ namespace WPF_Calendar_With_Notes
                     PositionOfDay PosOfDay = row as PositionOfDay;
                     if (PosOfDay != null)
                     {
-                        engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+                        ActionResult saveRes = engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+                        if (!saveRes.IsSuccess)
+                        {
+                            MessageBox.Show(saveRes.ErrorMsg, "Error");
+                        }
                     }
                 }
 
@@ -197,7 +210,12 @@ namespace WPF_Calendar_With_Notes
                     PositionOfDay PosOfDay = Grid.SelectedItem as PositionOfDay;
                     if (PosOfDay != null)
                     {
-                        engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+                        ActionResult saveRes = engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+                        if (!saveRes.IsSuccess)
+                        {
+                            MessageBox.Show(saveRes.ErrorMsg, "Error");
+                        }
+
                         if (!PosOfDay.OldNote.Equals(string.Empty))
                         {
                             var fodg = new FieldsOfDataGrid()
@@ -208,7 +226,12 @@ namespace WPF_Calendar_With_Notes
                                 User = PosOfDay.OldUser
                             };
 
-                            engine.AddNoteToDB(fodg);
+                            ActionResult addNoteResult = engine.AddNoteToDB(fodg);
+                            if (!addNoteResult.IsSuccess)
+                            {
+                                MessageBox.Show(addNoteResult.ErrorMsg, "Error");
+                            }
+
                         }
                         engine.UpdateOfPositions();
                     }

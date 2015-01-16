@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WPF_Calendar_With_Notes.CommonTypes;
 
-namespace WPF_Calendar_With_Notes.DAL.RealDAL
+namespace WPF_Calendar_With_Notes.DAL
 {
     public class RealNotesContext : DbContext, INotesContext<Note>
     {
