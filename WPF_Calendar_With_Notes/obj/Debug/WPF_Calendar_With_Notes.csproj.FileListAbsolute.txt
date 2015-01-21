@@ -90,4 +90,3 @@ D:\_Pulpit_2014_11\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_Fake_Dal\WPF_Cal
 D:\_Pulpit_2014_11\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_Fake_Dal\WPF_Calendar_With_Notes\obj\Debug\WPF_Calendar_With_Notes.Properties.Resources.en.resources
 D:\_Pulpit_2014_11\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_Fake_Dal\WPF_Calendar_With_Notes\obj\Debug\WPF_Calendar_With_Notes.csproj.GenerateResource.Cache
 D:\_Pulpit_2014_11\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_Fake_Dal\WPF_Calendar_With_Notes\obj\Debug\en\WPF_Calendar_With_Notes.resources.dll
-D:\_Pulpit_2014_11\Szkolenia\Cs_testowe\WPF_Calendar_With_Notes_Fake_Dal\WPF_Calendar_With_Notes\obj\Debug\WPF_Calendar_With_Notes.csprojResolveAssemblyReference.cache

@@ -222,4 +222,10 @@
   <data name="User" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="DataBaseStateFails" xml:space="preserve">
+    <value>Data Base state: Fails</value>
+  </data>
+  <data name="DataBaseStateOK" xml:space="preserve">
+    <value>Data Base state: OK</value>
+  </data>
 </root>

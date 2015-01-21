@@ -124,6 +124,24 @@ namespace WPF_Calendar_With_Notes.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Status Bazy danych: Błąd.
+        /// </summary>
+        public static string DataBaseStateFails {
+            get {
+                return ResourceManager.GetString("DataBaseStateFails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status Bazy danych: OK.
+        /// </summary>
+        public static string DataBaseStateOK {
+            get {
+                return ResourceManager.GetString("DataBaseStateOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Dzień.
         /// </summary>
         public static string Date {

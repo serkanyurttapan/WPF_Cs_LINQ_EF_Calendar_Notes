@@ -15,7 +15,16 @@ namespace WPF_Calendar_With_Notes
 {
     public class CalendarEngine : INotifyPropertyChanged, IListener, IData
     {
-        private string m_LanguageName = "Language Information: " + CultureInfo.CurrentUICulture.DisplayName;
+        private bool _isDataBaseOK;
+
+        private string m_DataBaseState;
+        public string DataBaseState
+        {
+            get { return m_DataBaseState; }
+            set { m_DataBaseState = value; WyslijPowiadomienie("DataBaseState"); }
+        }
+
+        private string m_LanguageName = "Culture Info: " + CultureInfo.CurrentUICulture.DisplayName;
         public string LanguageName
         {
             get { return m_LanguageName; }
@@ -25,7 +34,6 @@ namespace WPF_Calendar_With_Notes
                 WyslijPowiadomienie("LanguageName");
             }
         }
-
 
         private int m_NumberOfPositionForDataGrid;
         public int NumberOfPositionForDataGrid
@@ -46,7 +54,6 @@ namespace WPF_Calendar_With_Notes
                 return m_DtList;
             }
         }
-
 
         private DateTime m_selected_date;
         public DateTime Selected_Date
@@ -79,19 +86,40 @@ namespace WPF_Calendar_With_Notes
             }
         }
 
-        public ObservableCollection<PositionOfDay> Positions { get; set; }
+        private ObservableCollection<PositionOfDay> _positions;
+        public ObservableCollection<PositionOfDay> Positions { get { return _positions; } }
 
         private IEventBroker m_Broker;
         public INotesContext<Note> m_notesDB;
         public CalendarEngine(IEventBroker broker)
         {
             m_Broker = broker;
-
             m_Broker.RegisterFor(EventType.LanguageChanged, this);
+            _positions = new ObservableCollection<PositionOfDay>();            
 
-            Positions = new ObservableCollection<PositionOfDay>();
-
-            m_notesDB = DBSingleton<RealNotesContext>.Instancja;
+            try
+            {
+                m_notesDB = DBSingleton<RealNotesContext>.Instancja;
+                var notes = m_notesDB.BrokerNotes.Count();
+                _isDataBaseOK = true;
+                //DataBaseState = Properties.Resources.DataBaseStateOK;
+            }
+            catch(Exception e)
+            {
+                m_notesDB = DBSingleton<FakeNotesContext>.Instancja;
+                _isDataBaseOK = false;
+                //DataBaseState = Properties.Resources.DataBaseStateFails;
+            }
+            finally
+            {
+                if (_isDataBaseOK)
+                {
+                    DataBaseState = Properties.Resources.DataBaseStateOK;
+                }else
+                {
+                    DataBaseState = Properties.Resources.DataBaseStateFails;
+                }
+            }
 
             DateTime dt_tmp = DateTime.Now;
             Selected_Date = new DateTime(dt_tmp.Year, dt_tmp.Month, dt_tmp.Day);
@@ -102,7 +130,15 @@ namespace WPF_Calendar_With_Notes
         {
             if (type == EventType.LanguageChanged)
             {
-                LanguageName = "Language Information: " + CultureInfo.CurrentUICulture.DisplayName;
+                LanguageName = "Culture Info: " + CultureInfo.CurrentUICulture.DisplayName;
+                if (_isDataBaseOK)
+                {
+                    DataBaseState = Properties.Resources.DataBaseStateOK;
+                }
+                else
+                {
+                    DataBaseState = Properties.Resources.DataBaseStateFails;
+                }
             }
         }
 

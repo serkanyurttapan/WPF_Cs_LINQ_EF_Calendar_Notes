@@ -68,7 +68,6 @@ namespace WPF_Calendar_With_Notes
             engine = new CalendarEngine(m_Broker);
 
             m_viewModel = new ApplicationViewModel(engine, m_Broker, dataGrid1);
-
             this.DataContext = m_viewModel;
 
             bEditSelected.IsEnabled = false;
@@ -79,8 +78,6 @@ namespace WPF_Calendar_With_Notes
             if (!cultureInformation.Equals("pl-PL"))
                 m_viewModel.LanguageChangeCommand.Execute("en-GB");
         }
-
-
 
         List<DateTime> m_DtList;
         public void NotifyMe(EventType type, object data)
@@ -109,9 +106,7 @@ namespace WPF_Calendar_With_Notes
 
                     //menu1.Focus();
                     //bAddNote.Focus();                
-
                 }
-
         }
 
         void MainWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -165,7 +160,6 @@ namespace WPF_Calendar_With_Notes
                     MessageBox.Show(saveRes.ErrorMsg, "Error");
                 }
 
-
                 var fodg = new FieldsOfDataGrid()
                 {
                     Hour = PosOfDay.CurrentHour,
@@ -182,7 +176,6 @@ namespace WPF_Calendar_With_Notes
             }
             engine.UpdateOfPositions();
         }
-
 
         private void dataGrid1_PreviewKeyDown(object sender, KeyEventArgs e)
         {
@@ -236,7 +229,6 @@ namespace WPF_Calendar_With_Notes
                         engine.UpdateOfPositions();
                     }
                 }
-
         }
 
         private void bQuit_Click(object sender, RoutedEventArgs e)
@@ -263,9 +255,6 @@ namespace WPF_Calendar_With_Notes
             //po opuszczeniu kontrolki Calendar, focus znika
             menu1.Focus();
             bAddNote.Focus();
-
         }
-
     }
-
 }

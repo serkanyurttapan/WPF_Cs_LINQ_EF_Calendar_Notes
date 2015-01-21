@@ -4,7 +4,7 @@
         xmlns:Converters="clr-namespace:WPF_Calendar_With_Notes.Utilities.Converters" 
         xmlns:VM="clr-namespace:WPF_Calendar_With_Notes.ViewModel"        
         Title="{Binding MainWindowTitle,Source={StaticResource Resources}}"
-        Height="517" Width="785">
+        Height="520" Width="800">
 
     <Window.Resources>
         <Converters:ConverterOfDate x:Key="StatusBarDateConverter" />
@@ -40,7 +40,7 @@
         <StatusBar x:Name="statusBar1" DockPanel.Dock="Bottom">
 
             <StatusBarItem>
-                <TextBlock Width="240" FontSize="12" Text="{Binding ElementName=MainCalendar, 
+                <TextBlock Width="235" FontSize="12" Text="{Binding ElementName=MainCalendar, 
                     Path=SelectedDate, 
                     Converter={StaticResource StatusBarDateConverter}}" x:Name="DateTextBlock" />
             </StatusBarItem>
@@ -48,11 +48,17 @@
             <Separator Width="2"/>
 
             <StatusBarItem>
-                <TextBlock Width="220" x:Name="textBlock1" Text="{Binding Path=engine.NumberOfPositionForDataGrid, Converter={StaticResource NumberOfNotesConverter}}"/>
+                <TextBlock Width="145" x:Name="textBlock1" Text="{Binding Path=engine.NumberOfPositionForDataGrid, Converter={StaticResource NumberOfNotesConverter}}"/>
             </StatusBarItem>
 
             <Separator Width="2"/>
 
+            <StatusBarItem>
+                <TextBlock Width="145" x:Name="tbDataBaseState" Text="{Binding Path=engine.DataBaseState}"/>
+            </StatusBarItem>
+
+            <Separator Width="2"/>
+            
             <StatusBarItem>
                 <TextBlock Text="{Binding Path=engine.LanguageName}" x:Name="textBlock2" />
             </StatusBarItem>
