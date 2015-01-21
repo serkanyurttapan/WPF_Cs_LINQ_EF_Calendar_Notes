@@ -12,8 +12,6 @@ namespace WPF_Calendar_With_Notes
         public DateTime Date { get; set; }
         public string Message { get; set; }
         //public string Title { get; set; }
-
         public string User { get; set; }
-
     }
 }

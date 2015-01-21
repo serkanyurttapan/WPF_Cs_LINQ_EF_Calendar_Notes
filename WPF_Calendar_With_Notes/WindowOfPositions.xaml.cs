@@ -14,42 +14,37 @@ using System.Windows.Shapes;
 
 namespace WPF_Calendar_With_Notes
 {
-
     /// <summary>
-    /// Interaction logic for OknoWidokuPozycjiDnia.xaml
+    /// Interaction logic for WindowOfPositions.xaml
     /// </summary>
     public partial class WindowOfPositions : Window
     {
-
-        private PositionOfDay m_pozycja;
-        
-        private DateTime m_date;
-        private CalendarEngine m_cal_engine;
+        private PositionOfDay _PositionOfDay;        
+        private DateTime _Date;
+        private CalendarEngine _CalendarEngine;
 
         public WindowOfPositions()
         {
             InitializeComponent();
         }
 
-        public WindowOfPositions(PositionOfDay _pozycja, CalendarEngine _c_engine)
+        public WindowOfPositions(PositionOfDay position, CalendarEngine engine)
             : this()
         {
-            m_pozycja = _pozycja;
-            DataContext = m_pozycja;
+            _PositionOfDay = position;
+            DataContext = _PositionOfDay;
 
-            m_cal_engine = _c_engine;
-            m_date = m_cal_engine.Selected_Date;
+            _CalendarEngine = engine;
+            _Date = _CalendarEngine.Selected_Date;
 
-            tbDate.Text = m_date.ToString().Remove(10) + m_date.ToString(" (dddd)");
+            tbDate.Text = _Date.ToString().Remove(10) + _Date.ToString(" (dddd)");
 
-            tbUser.Text = m_pozycja.CurrentUser;
-
+            tbUser.Text = _PositionOfDay.CurrentUser;
         }
 
         private void bSave_Click(object sender, RoutedEventArgs e)
         {
-
-            if (string.IsNullOrEmpty(m_pozycja.CurrentNote))
+            if (string.IsNullOrEmpty(_PositionOfDay.CurrentNote))
             {
                 MessageBoxResult result = MessageBox.Show(Properties.Resources.NoteEmpty, Properties.Resources.NoteEmptyTitle, MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
                 if (result == MessageBoxResult.Yes)
@@ -70,9 +65,7 @@ namespace WPF_Calendar_With_Notes
             {
                 this.DialogResult = true;
                 this.Close();
-
             }
-
         }
 
         private void bCancel_Click(object sender, RoutedEventArgs e)
@@ -81,6 +74,5 @@ namespace WPF_Calendar_With_Notes
             this.Close();
         }
     }
-
 
 }

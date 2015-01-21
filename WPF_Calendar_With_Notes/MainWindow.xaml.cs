@@ -26,8 +26,8 @@ namespace WPF_Calendar_With_Notes
     /// </summary>
     public partial class MainWindow : Window, IListener
     {
-        private ApplicationViewModel m_viewModel;
-        public CalendarEngine engine { get; set; }
+        private ApplicationViewModel _ViewModel;
+        public CalendarEngine Engine { get; set; }
 
         public MainWindow()
         {
@@ -65,10 +65,10 @@ namespace WPF_Calendar_With_Notes
             m_Broker.RegisterFor(EventType.LanguageChanged, this);
             m_Broker.RegisterFor(EventType.SelectedDateChanged, this);
 
-            engine = new CalendarEngine(m_Broker);
+            Engine = new CalendarEngine(m_Broker);
 
-            m_viewModel = new ApplicationViewModel(engine, m_Broker, dataGrid1);
-            this.DataContext = m_viewModel;
+            _ViewModel = new ApplicationViewModel(Engine, m_Broker, dataGrid1);
+            this.DataContext = _ViewModel;
 
             bEditSelected.IsEnabled = false;
             bDeleteSelectedNote.IsEnabled = false;
@@ -76,7 +76,7 @@ namespace WPF_Calendar_With_Notes
             string cultureInformation = CultureInfo.CurrentCulture.Name;
 
             if (!cultureInformation.Equals("pl-PL"))
-                m_viewModel.LanguageChangeCommand.Execute("en-GB");
+                _ViewModel.LanguageChangeCommand.Execute("en-GB");
         }
 
         List<DateTime> m_DtList;
@@ -120,7 +120,7 @@ namespace WPF_Calendar_With_Notes
 
         void MainWindow_Closed(object sender, EventArgs e)
         {
-            engine.m_notesDB.Dispose();
+            Engine.m_notesDB.Dispose();
 
             Loaded -= MainWindow_Loaded;
             Closing -= MainWindow_Closing;
@@ -132,7 +132,7 @@ namespace WPF_Calendar_With_Notes
         private void dataGrid1_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             //uzyć Binding do zmiany "IsEnabled"
-            if (engine.Positions.Count == 0)
+            if (Engine.Positions.Count == 0)
             {
                 bEditSelected.IsEnabled = false;
                 bDeleteSelectedNote.IsEnabled = false;
@@ -154,7 +154,7 @@ namespace WPF_Calendar_With_Notes
                 !PosOfDay.CurrentUser.Equals(PosOfDay.OldUser)
                 )
             {
-                ActionResult saveRes = engine.RemoveNoteFromDB(PosOfDay.OldHour, PosOfDay.OldMinute);
+                ActionResult saveRes = Engine.RemoveNoteFromDB(PosOfDay.OldHour, PosOfDay.OldMinute);
                 if (!saveRes.IsSuccess)
                 {
                     MessageBox.Show(saveRes.ErrorMsg, "Error");
@@ -168,13 +168,13 @@ namespace WPF_Calendar_With_Notes
                     User = PosOfDay.CurrentUser
                 };
 
-                ActionResult addNoteResult = engine.AddNoteToDB(fodg);
+                ActionResult addNoteResult = Engine.AddNoteToDB(fodg);
                 if (!addNoteResult.IsSuccess)
                 {
                     MessageBox.Show(addNoteResult.ErrorMsg, "Error");
                 }
             }
-            engine.UpdateOfPositions();
+            Engine.UpdateOfPositions();
         }
 
         private void dataGrid1_PreviewKeyDown(object sender, KeyEventArgs e)
@@ -187,7 +187,7 @@ namespace WPF_Calendar_With_Notes
                     PositionOfDay PosOfDay = row as PositionOfDay;
                     if (PosOfDay != null)
                     {
-                        ActionResult saveRes = engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+                        ActionResult saveRes = Engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
                         if (!saveRes.IsSuccess)
                         {
                             MessageBox.Show(saveRes.ErrorMsg, "Error");
@@ -195,7 +195,7 @@ namespace WPF_Calendar_With_Notes
                     }
                 }
 
-                engine.UpdateOfPositions();
+                Engine.UpdateOfPositions();
             }
             else
                 if (e.Key == Key.Escape)
@@ -203,13 +203,13 @@ namespace WPF_Calendar_With_Notes
                     PositionOfDay PosOfDay = Grid.SelectedItem as PositionOfDay;
                     if (PosOfDay != null)
                     {
-                        ActionResult saveRes = engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+                        ActionResult saveRes = Engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
                         if (!saveRes.IsSuccess)
                         {
                             MessageBox.Show(saveRes.ErrorMsg, "Error");
                         }
 
-                        if (!PosOfDay.OldNote.Equals(string.Empty))
+                        if (!string.IsNullOrWhiteSpace(PosOfDay.OldNote))
                         {
                             var fodg = new FieldsOfDataGrid()
                             {
@@ -219,14 +219,14 @@ namespace WPF_Calendar_With_Notes
                                 User = PosOfDay.OldUser
                             };
 
-                            ActionResult addNoteResult = engine.AddNoteToDB(fodg);
+                            ActionResult addNoteResult = Engine.AddNoteToDB(fodg);
                             if (!addNoteResult.IsSuccess)
                             {
                                 MessageBox.Show(addNoteResult.ErrorMsg, "Error");
                             }
 
                         }
-                        engine.UpdateOfPositions();
+                        Engine.UpdateOfPositions();
                     }
                 }
         }

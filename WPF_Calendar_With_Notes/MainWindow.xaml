@@ -48,26 +48,26 @@
             <Separator Width="2"/>
 
             <StatusBarItem>
-                <TextBlock Width="145" x:Name="textBlock1" Text="{Binding Path=engine.NumberOfPositionForDataGrid, Converter={StaticResource NumberOfNotesConverter}}"/>
+                <TextBlock Width="145" x:Name="textBlock1" Text="{Binding Path=Engine.NumberOfPositionForDataGrid, Converter={StaticResource NumberOfNotesConverter}}"/>
             </StatusBarItem>
 
             <Separator Width="2"/>
 
             <StatusBarItem>
-                <TextBlock Width="145" x:Name="tbDataBaseState" Text="{Binding Path=engine.DataBaseState}"/>
+                <TextBlock Width="145" x:Name="tbDataBaseState" Text="{Binding Path=Engine.DataBaseState}"/>
             </StatusBarItem>
 
             <Separator Width="2"/>
             
             <StatusBarItem>
-                <TextBlock Text="{Binding Path=engine.LanguageName}" x:Name="textBlock2" />
+                <TextBlock Text="{Binding Path=Engine.LanguageName}" x:Name="textBlock2" />
             </StatusBarItem>
 
         </StatusBar>
 
 
         <Grid>
-            <Calendar SelectedDate="{Binding Path=engine.Selected_Date, Mode=TwoWay}" 
+            <Calendar SelectedDate="{Binding Path=Engine.Selected_Date, Mode=TwoWay}" 
                       SelectionMode="MultipleRange" 
                       IsTodayHighlighted="True" Height="165" Width="180" Margin="24,55,0,0" 
                       Name="MainCalendar" VerticalAlignment="Top"
@@ -86,7 +86,7 @@
 
             <DataGrid
                 PreviewKeyDown="dataGrid1_PreviewKeyDown" RowEditEnding="dataGrid1_RowEditEnding" 
-                      IsReadOnly="False" ItemsSource="{Binding Path=engine.Positions}" AutoGenerateColumns="False" 
+                      IsReadOnly="False" ItemsSource="{Binding Path=Engine.Positions}" AutoGenerateColumns="False" 
                       HorizontalAlignment="Left" SelectedCellsChanged="dataGrid1_SelectedCellsChanged"
                   Height="330"  Margin="230,55,0,0" Width="520" FontSize="12" Name="dataGrid1" VerticalAlignment="Top"  >
                 <DataGrid.Columns>

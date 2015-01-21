@@ -8,32 +8,32 @@ namespace WPF_Calendar_With_Notes
 {
     public class FieldsOfDataGrid
     {
-        private string m_User = "";
+        private string _User = "";
         public string User
         {
-            get { return m_User; }
-            set { m_User = value; }
+            get { return _User; }
+            set { _User = value; }
         }
 
-        private string m_Note = "";
+        private string _Note = "";
         public string Note
         {
-            get { return m_Note; }
-            set { m_Note = value; }
+            get { return _Note; }
+            set { _Note = value; }
         }
 
-        private short m_Hour = 0;
+        private short _Hour = 0;
         public short Hour
         {
-            get { return m_Hour; }
-            set { m_Hour = value; }
+            get { return _Hour; }
+            set { _Hour = value; }
         }
 
-        private short m_Minute = 0;
+        private short _Minute = 0;
         public short Minute
         {
-            get { return m_Minute; }
-            set { m_Minute = value; }
+            get { return _Minute; }
+            set { _Minute = value; }
         }
     }
 }

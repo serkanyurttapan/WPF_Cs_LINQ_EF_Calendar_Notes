@@ -13,104 +13,104 @@ namespace WPF_Calendar_With_Notes
         {
         }
 
-        private string m_CurrentUser = "";
+        private string _CurrentUser = "";
         public string CurrentUser
         {
-            get { return m_CurrentUser; }
+            get { return _CurrentUser; }
             set
             {
-                m_CurrentUser = value;
+                _CurrentUser = value;
                 WyslijPowiadomienie("CurrentUser");
             }
         }
 
-        private string m_OldUser = "";
+        private string _OldUser = "";
         public string OldUser
         {
-            get { return m_OldUser; }
+            get { return _OldUser; }
             set
             {
-                m_OldUser = value;
+                _OldUser = value;
             }
         }
 
 
-        private int m_NumberOfPosition;
+        private int _NumberOfPosition;
         public int NumberOfPosition
         {
-            get { return m_NumberOfPosition; }
-            set { m_NumberOfPosition = value; }
+            get { return _NumberOfPosition; }
+            set { _NumberOfPosition = value; }
         }
 
 
-        private short m_OldHour;
+        private short _OldHour;
         public short OldHour
         {
-            get { return m_OldHour; }
-            set { m_OldHour = value; }
+            get { return _OldHour; }
+            set { _OldHour = value; }
         }
 
 
 
-        private short m_CurrentHour;
+        private short _CurrentHour;
         public short CurrentHour
         {
-            get { return m_CurrentHour; }
+            get { return _CurrentHour; }
             set
             {
-                m_CurrentHour = value;
+                _CurrentHour = value;
                 WyslijPowiadomienie("CurrentHour");
             }
         }
 
-        private short m_OldMinute;
+        private short _OldMinute;
         public short OldMinute
         {
-            get { return m_OldMinute; }
-            set { m_OldMinute = value; }
+            get { return _OldMinute; }
+            set { _OldMinute = value; }
         }
 
 
-        private short m_CurrentMinute;
+        private short _CurrentMinute;
         public short CurrentMinute
         {
-            get { return m_CurrentMinute; }
+            get { return _CurrentMinute; }
             set
             {
-                m_CurrentMinute = value;
+                _CurrentMinute = value;
                 WyslijPowiadomienie("CurrentMinute");
             }
         }
 
 
-        private string m_OldNote = "";
+        private string _OldNote = "";
         public string OldNote
         {
-            get { return m_OldNote; }
-            set { m_OldNote = value; }
+            get { return _OldNote; }
+            set { _OldNote = value; }
         }
 
 
-        private string m_CurrentNote = "";
+        private string _CurrentNote = "";
         public string CurrentNote
         {
-            get { return m_CurrentNote; }
+            get { return _CurrentNote; }
             set
             {
-                m_CurrentNote = value;
+                _CurrentNote = value;
                 WyslijPowiadomienie("CurrentNote");
             }
         }
 
-        private DateTime m_DateTimeVal;
+        private DateTime _DateTimeVal;
         public DateTime DateTimeVal
         {
-            get { return m_DateTimeVal; }
+            get { return _DateTimeVal; }
             set 
             { 
-                m_DateTimeVal = value;
-                m_CurrentHour = (short)m_DateTimeVal.Hour;
-                m_CurrentMinute = (short)m_DateTimeVal.Minute;
+                _DateTimeVal = value;
+                _CurrentHour = (short)_DateTimeVal.Hour;
+                _CurrentMinute = (short)_DateTimeVal.Minute;
                 WyslijPowiadomienie("DateTimeVal");
             }
         }

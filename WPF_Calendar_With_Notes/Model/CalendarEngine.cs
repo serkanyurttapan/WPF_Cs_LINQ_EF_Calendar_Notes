@@ -17,63 +17,63 @@ namespace WPF_Calendar_With_Notes
     {
         private bool _isDataBaseOK;
 
-        private string m_DataBaseState;
+        private string _DataBaseState;
         public string DataBaseState
         {
-            get { return m_DataBaseState; }
-            set { m_DataBaseState = value; WyslijPowiadomienie("DataBaseState"); }
+            get { return _DataBaseState; }
+            set { _DataBaseState = value; WyslijPowiadomienie("DataBaseState"); }
         }
 
-        private string m_LanguageName = "Culture Info: " + CultureInfo.CurrentUICulture.DisplayName;
+        private string _LanguageName = "Culture Info: " + CultureInfo.CurrentUICulture.DisplayName;
         public string LanguageName
         {
-            get { return m_LanguageName; }
+            get { return _LanguageName; }
             set
             {
-                m_LanguageName = value;
+                _LanguageName = value;
                 WyslijPowiadomienie("LanguageName");
             }
         }
 
-        private int m_NumberOfPositionForDataGrid;
+        private int _NumberOfPositionForDataGrid;
         public int NumberOfPositionForDataGrid
         {
-            get { return m_NumberOfPositionForDataGrid; }
+            get { return _NumberOfPositionForDataGrid; }
             set
             {
-                m_NumberOfPositionForDataGrid = value;
+                _NumberOfPositionForDataGrid = value;
                 WyslijPowiadomienie("NumberOfPositionForDataGrid");
             }
         }
 
-        private List<DateTime> m_DtList = new List<DateTime>();
+        private List<DateTime> _DtList = new List<DateTime>();
         public List<DateTime> DtList
         {
             get
             {
-                return m_DtList;
+                return _DtList;
             }
         }
 
-        private DateTime m_selected_date;
+        private DateTime _SelectedDate;
         public DateTime Selected_Date
         {
             get
             {
-                return m_selected_date;
+                return _SelectedDate;
             }
 
             set
             {
-                if (value != m_selected_date)
+                if (value != _SelectedDate)
                 {
-                    m_selected_date = value;
+                    _SelectedDate = value;
 
                     //W kontrolce Calendar, po kliknięciu
                     //kolekcja dat przestaje byc zaznaczona
                     //rozwiazanie: 1. Watek uaktualniajacy lub 2. powiadomienie MainWindow o potrzebie zaznaczenia
                     DtList.Clear();
-                    DtList.Add(m_selected_date);
+                    DtList.Add(_SelectedDate);
                     foreach (var item in m_notesDB.BrokerNotes)
                     {
                         DtList.Add(item.Date);
@@ -86,8 +86,8 @@ namespace WPF_Calendar_With_Notes
             }
         }
 
-        private ObservableCollection<PositionOfDay> _positions;
-        public ObservableCollection<PositionOfDay> Positions { get { return _positions; } }
+        private ObservableCollection<PositionOfDay> _Positions;
+        public ObservableCollection<PositionOfDay> Positions { get { return _Positions; } }
 
         private IEventBroker m_Broker;
         public INotesContext<Note> m_notesDB;
@@ -95,7 +95,7 @@ namespace WPF_Calendar_With_Notes
         {
             m_Broker = broker;
             m_Broker.RegisterFor(EventType.LanguageChanged, this);
-            _positions = new ObservableCollection<PositionOfDay>();            
+            _Positions = new ObservableCollection<PositionOfDay>();            
 
             try
             {
@@ -147,7 +147,7 @@ namespace WPF_Calendar_With_Notes
             if (Positions.Count != 0)
                 Positions.Clear();
 
-            IEnumerable<FieldsOfDataGrid> _list = GetNotesForSelectedDay(m_selected_date);
+            IEnumerable<FieldsOfDataGrid> _list = GetNotesForSelectedDay(_SelectedDate);
 
             if (_list.Count() == 0)
             {

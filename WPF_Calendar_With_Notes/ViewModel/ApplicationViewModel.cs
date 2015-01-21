@@ -11,16 +11,15 @@ using System.Threading;
 using WPF_Calendar_With_Notes.Utilities;
 using System.Windows;
 
-
 namespace WPF_Calendar_With_Notes.ViewModel
 {
     public class ApplicationViewModel
     {
-        public CalendarEngine engine { get; set; }
-        private DataGrid m_DataGrid;
-        private IEventBroker m_Broker;
+        public CalendarEngine Engine { get; set; }
+        private DataGrid _DataGrid;
+        private IEventBroker _Broker;
 
-        public Func<object, bool> m_true = new Func<object, bool>(o => { return true; });
+        public Func<object, bool> TrueFunc = new Func<object, bool>(o => { return true; });
         public ICommand LanguageChangeCommand { get; set; }
         public ICommand HelpCommand { get; set; }
         public ICommand DeleteSelectedNoteCommand { get; set; }
@@ -29,14 +28,14 @@ namespace WPF_Calendar_With_Notes.ViewModel
 
         public ApplicationViewModel(CalendarEngine _engin, IEventBroker _broker, DataGrid _dataGrid)
         {
-            engine = _engin;
-            m_DataGrid = _dataGrid;
-            m_Broker = _broker;
-            this.LanguageChangeCommand = new Utilities.CommandBase(LanguageChangeAction, m_true);
-            this.HelpCommand = new Utilities.CommandBase(HelpAction, m_true);
-            this.DeleteSelectedNoteCommand = new Utilities.CommandBase(DeleteAction, m_true);
-            this.NewNoteCommand = new Utilities.CommandBase(NewNoteAction, m_true);
-            this.EditSelectedNoteCommand = new Utilities.CommandBase(EditSelectedNoteAction, m_true);
+            Engine = _engin;
+            _DataGrid = _dataGrid;
+            _Broker = _broker;
+            this.LanguageChangeCommand = new Utilities.CommandBase(LanguageChangeAction, TrueFunc);
+            this.HelpCommand = new Utilities.CommandBase(HelpAction, TrueFunc);
+            this.DeleteSelectedNoteCommand = new Utilities.CommandBase(DeleteAction, TrueFunc);
+            this.NewNoteCommand = new Utilities.CommandBase(NewNoteAction, TrueFunc);
+            this.EditSelectedNoteCommand = new Utilities.CommandBase(EditSelectedNoteAction, TrueFunc);
         }
 
         void LanguageChangeAction(object parameter)
@@ -50,7 +49,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
 
             i18nManager.ChangeCulture(currentUiCulture);
 
-            m_Broker.FireEvent(EventType.LanguageChanged, new object());
+            _Broker.FireEvent(EventType.LanguageChanged, new object());
         }
 
         void HelpAction(object parameter)
@@ -60,21 +59,21 @@ namespace WPF_Calendar_With_Notes.ViewModel
 
         void DeleteAction(object parameter)
         {
-            PositionOfDay selectedPosition = m_DataGrid.SelectedItem as PositionOfDay;
+            PositionOfDay selectedPosition = _DataGrid.SelectedItem as PositionOfDay;
             if (selectedPosition != null)
             {
                 if (MessageBox.Show(
                     Properties.Resources.NoteWillBeDeleted, Properties.Resources.NoteWillBeDeletedTitle,
                     MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
-                    ActionResult saveRes = engine.RemoveNoteFromDB(selectedPosition.CurrentHour, selectedPosition.CurrentMinute);
+                    ActionResult saveRes = Engine.RemoveNoteFromDB(selectedPosition.CurrentHour, selectedPosition.CurrentMinute);
                     if (!saveRes.IsSuccess)
                     {
                         MessageBox.Show(saveRes.ErrorMsg, "Error");
                     }
                 }
             }
-            engine.UpdateOfPositions();
+            Engine.UpdateOfPositions();
         }
 
         void NewNoteAction(object parameter)
@@ -89,7 +88,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
                 DateTimeVal = new DateTime(1, 1, 1, 0, 0, 0)
             };
 
-            WindowOfPositions okno = new WindowOfPositions(PosOfDay, engine);
+            WindowOfPositions okno = new WindowOfPositions(PosOfDay, Engine);
             var x = okno.ShowDialog().Value;
             if (x)
             {
@@ -104,7 +103,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
                     User = PosOfDay.CurrentUser
                 };
 
-                ActionResult addNoteResult = engine.AddNoteToDB(fodg);
+                ActionResult addNoteResult = Engine.AddNoteToDB(fodg);
 
                 if (!addNoteResult.IsSuccess)
                 {
@@ -112,13 +111,13 @@ namespace WPF_Calendar_With_Notes.ViewModel
                     {
                         if (MessageBox.Show(Properties.Resources.CurrentNoteBusy, Properties.Resources.ReplaceNote, MessageBoxButton.YesNo, MessageBoxImage.Information) == MessageBoxResult.Yes)
                         {
-                            ActionResult saveRes = engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
+                            ActionResult saveRes = Engine.RemoveNoteFromDB(PosOfDay.CurrentHour, PosOfDay.CurrentMinute);
                             if (!saveRes.IsSuccess)
                             {
                                 MessageBox.Show(saveRes.ErrorMsg, "Error");
                             }
 
-                            ActionResult addNoteAgainResult = engine.AddNoteToDB(fodg);
+                            ActionResult addNoteAgainResult = Engine.AddNoteToDB(fodg);
                             if (!addNoteAgainResult.IsSuccess)
                             {
                                 MessageBox.Show(addNoteAgainResult.ErrorMsg, "Error");
@@ -131,13 +130,13 @@ namespace WPF_Calendar_With_Notes.ViewModel
                     }
                 }
 
-                engine.UpdateOfPositions();
+                Engine.UpdateOfPositions();
             }
         }
 
         void EditSelectedNoteAction(object parameter)
         {
-            foreach (var row in m_DataGrid.SelectedItems)
+            foreach (var row in _DataGrid.SelectedItems)
             {
                 PositionOfDay selectedPosition = row as PositionOfDay;
                 PositionOfDay primary = new PositionOfDay()
@@ -148,11 +147,11 @@ namespace WPF_Calendar_With_Notes.ViewModel
                     CurrentUser = selectedPosition.CurrentUser
                 };
 
-                WindowOfPositions okno = new WindowOfPositions(selectedPosition, engine);
+                WindowOfPositions okno = new WindowOfPositions(selectedPosition, Engine);
                 var x = okno.ShowDialog().Value;
                 if (x)
                 {
-                    ActionResult saveRes = engine.RemoveNoteFromDB(primary.CurrentHour, primary.CurrentMinute);
+                    ActionResult saveRes = Engine.RemoveNoteFromDB(primary.CurrentHour, primary.CurrentMinute);
                     if (!saveRes.IsSuccess)
                     {
                         MessageBox.Show(saveRes.ErrorMsg, "Error");
@@ -171,7 +170,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
                         Note = selectedPosition.CurrentNote,
                         User = selectedPosition.CurrentUser
                     };
-                    engine.AddNoteToDB(fodg);
+                    Engine.AddNoteToDB(fodg);
                 }
                 //else//selectedPosition == null
                 //{
@@ -195,7 +194,7 @@ namespace WPF_Calendar_With_Notes.ViewModel
                 //    }
                 //}
             }
-            engine.UpdateOfPositions();
+            Engine.UpdateOfPositions();
         }
 
     }
