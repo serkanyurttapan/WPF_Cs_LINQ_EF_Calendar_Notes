@@ -20,6 +20,6 @@ Attention: Project still under constraction :)
 
 To Do:
 
-Styles, UnityContainer - in next update
+Styles, UnityContainer - in next update.
 
-Author
+   Author
