@@ -16,10 +16,11 @@ New features and old staff includes:
 
 -User can change Resources and Culture
 
-Attention: Project still under constraction :)
+Attention: Project still under constraction
 
 To Do:
 
+CultureInfo ci = CultureInfo.GetCultureInfo ("pl-PL");
 Styles, UnityContainer - in next update.
 
    Author
