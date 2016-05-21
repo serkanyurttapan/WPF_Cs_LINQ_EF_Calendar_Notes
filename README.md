@@ -24,3 +24,4 @@ CultureInfo ci = CultureInfo.GetCultureInfo ("pl-PL");
 Styles, UnityContainer - in next update.
 
    Author
+   kbrzostowski<at>gmail.com
